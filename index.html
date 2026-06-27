@@ -34,7 +34,6 @@
     line-height: 1.6;
   }
 
-  /* ── NAV ── */
   nav {
     position: sticky; top: 0; z-index: 100;
     background: rgba(245,244,240,0.92);
@@ -46,7 +45,6 @@
   .nav-brand {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700; font-size: 15px; color: var(--accent);
-    letter-spacing: -0.3px;
   }
   .nav-cta {
     background: var(--accent); color: #fff;
@@ -57,7 +55,6 @@
   }
   .nav-cta:hover { background: var(--accent2); }
 
-  /* ── HERO ── */
   .hero {
     background: var(--node-bg);
     padding: 80px 24px 72px;
@@ -65,7 +62,6 @@
     position: relative;
     overflow: hidden;
   }
-
   .hero-grid {
     position: absolute; inset: 0;
     background-image:
@@ -73,7 +69,6 @@
       linear-gradient(90deg, rgba(99,102,241,.12) 1px, transparent 1px);
     background-size: 36px 36px;
   }
-
   .hero-badge {
     display: inline-flex; align-items: center; gap: 7px;
     background: rgba(99,102,241,.18);
@@ -89,7 +84,6 @@
     animation: pulse 2s ease-in-out infinite;
   }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-
   .hero h1 {
     font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(32px, 6vw, 58px);
@@ -104,13 +98,10 @@
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-
   .hero-sub {
     color: #94a3b8; font-size: 17px; max-width: 520px;
     margin: 0 auto 36px; position: relative; line-height: 1.65;
   }
-
-  /* workflow animado */
   .hero-flow {
     display: flex; align-items: center; justify-content: center;
     gap: 0; flex-wrap: nowrap;
@@ -131,24 +122,37 @@
   @keyframes nodein { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
   .hf-arrow { color: rgba(255,255,255,.3); font-size: 18px; margin: 0 4px; flex-shrink: 0; }
 
-  .hero-cta {
+  /* BOTONES HERO */
+  .hero-btns { display: flex; flex-direction: column; align-items: center; gap: 12px; position: relative; }
+  .btn-hotmart {
     display: inline-flex; align-items: center; gap: 10px;
     background: linear-gradient(135deg, #4338ca, #6d28d9);
-    color: #fff; font-size: 16px; font-weight: 600;
+    color: #fff; font-size: 16px; font-weight: 700;
     padding: 16px 36px; border-radius: 12px; border: none;
     cursor: pointer; text-decoration: none;
     transition: transform .15s, box-shadow .15s;
-    position: relative;
+    width: 320px; justify-content: center;
   }
-  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(67,56,202,.4); }
-
+  .btn-hotmart:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(67,56,202,.4); }
+  .btn-mp {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, #009ee3, #007eb5);
+    color: #fff; font-size: 14px; font-weight: 600;
+    padding: 13px 28px; border-radius: 10px; border: none;
+    cursor: pointer; text-decoration: none;
+    transition: transform .15s;
+    width: 320px; justify-content: center;
+  }
+  .btn-mp:hover { transform: translateY(-2px); }
+  .btn-divider {
+    color: #475569; font-size: 12px; position: relative;
+  }
   .hero-price {
-    margin-top: 14px; position: relative;
-    color: #64748b; font-size: 13px;
+    margin-top: 10px; position: relative;
+    color: #64748b; font-size: 12px;
   }
   .hero-price strong { color: #a5b4fc; }
 
-  /* ── SECCIÓN GENÉRICA ── */
   section { padding: 72px 24px; }
   .container { max-width: 960px; margin: 0 auto; }
 
@@ -170,9 +174,7 @@
     max-width: 560px; line-height: 1.7;
   }
 
-  /* ── PROBLEMA ── */
   .problem { background: var(--white); }
-
   .pain-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -183,19 +185,16 @@
     padding: 20px; background: var(--page);
     border-left: 4px solid var(--warn);
   }
-  .pain-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
+  .pain-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
   .pain-card p { font-size: 13px; color: var(--ink2); line-height: 1.55; }
   .pain-emoji { font-size: 22px; margin-bottom: 8px; }
 
-  /* ── QUÉ ES ── */
   .what { background: var(--page); }
-
   .what-grid {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 48px; align-items: center; margin-top: 48px;
   }
   @media(max-width:640px){ .what-grid { grid-template-columns:1fr; gap:32px; } }
-
   .book-mock {
     background: var(--node-bg);
     border-radius: 16px; padding: 32px 28px;
@@ -216,7 +215,6 @@
   }
   .book-title span { color: #818cf8; }
   .book-sub { color: #64748b; font-size: 12px; position: relative; margin-bottom: 20px; }
-
   .book-chapters { position: relative; }
   .book-ch {
     display: flex; align-items: center; gap: 10px;
@@ -231,7 +229,6 @@
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
-
   .what-list { list-style: none; }
   .what-list li {
     display: flex; gap: 12px; align-items: flex-start;
@@ -246,7 +243,6 @@
     font-size: 14px; flex-shrink: 0; margin-top: 1px;
   }
 
-  /* ── PARA QUIÉN ── */
   .who { background: var(--white); }
   .who-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -260,7 +256,6 @@
   .who-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 5px; }
   .who-card p { font-size: 13px; color: var(--ink2); line-height: 1.5; }
 
-  /* ── STATS ── */
   .stats { background: var(--node-bg); padding: 56px 24px; }
   .stats-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -275,7 +270,6 @@
   }
   .stat-lab { color: #64748b; font-size: 13px; margin-top: 6px; line-height: 1.4; }
 
-  /* ── CONTENIDO ── */
   .content { background: var(--page); }
   .parts-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -301,7 +295,6 @@
   }
   .part-ch:last-child { border-bottom: none; }
 
-  /* ── FLOW VISUAL ── */
   .flow-section { background: var(--white); }
   .flow-visual {
     display: flex; align-items: center; justify-content: center;
@@ -320,58 +313,81 @@
   .fv-4 { background: linear-gradient(135deg,#d97706,#f59e0b); }
   .fv-5 { background: linear-gradient(135deg,#db2777,#e11d48); }
 
-  /* ── PRECIO / CTA ── */
+  /* SECCIÓN PRECIO */
   .pricing { background: var(--node-bg); padding: 80px 24px; text-align: center; }
+  .price-cards {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 20px; max-width: 760px; margin: 40px auto 0;
+  }
+  @media(max-width:600px){ .price-cards { grid-template-columns: 1fr; } }
 
   .price-card {
     background: rgba(255,255,255,.05);
     border: 1px solid rgba(99,102,241,.35);
-    border-radius: 20px; padding: 48px 40px;
-    max-width: 480px; margin: 40px auto 0;
+    border-radius: 20px; padding: 36px 28px;
+    text-align: center;
   }
+  .price-card.featured {
+    border-color: #818cf8;
+    background: rgba(99,102,241,.12);
+    position: relative;
+  }
+  .price-badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(135deg, #4338ca, #6d28d9);
+    color: white; font-size: 11px; font-weight: 700;
+    padding: 4px 16px; border-radius: 20px; white-space: nowrap;
+  }
+  .price-platform { font-size: 12px; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
   .price-tag {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 64px; font-weight: 700; color: #fff;
+    font-size: 52px; font-weight: 700; color: #fff;
     line-height: 1;
   }
-  .price-currency { font-size: 28px; color: #818cf8; vertical-align: super; }
-  .price-period { font-size: 14px; color: #64748b; margin-top: 4px; }
-
+  .price-currency { font-size: 24px; color: #818cf8; vertical-align: super; }
+  .price-period { font-size: 13px; color: #64748b; margin-top: 4px; margin-bottom: 20px; }
   .price-includes {
-    list-style: none; margin: 28px 0;
+    list-style: none; margin: 20px 0;
     text-align: left; border-top: 1px solid rgba(255,255,255,.08);
-    padding-top: 24px;
+    padding-top: 20px;
   }
   .price-includes li {
     display: flex; align-items: center; gap: 10px;
-    font-size: 14px; color: #94a3b8;
-    padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,.06);
+    font-size: 13px; color: #94a3b8;
+    padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.06);
   }
   .price-includes li:last-child { border-bottom: none; }
   .pi-check {
-    width: 18px; height: 18px; border-radius: 50%;
+    width: 16px; height: 16px; border-radius: 50%;
     background: rgba(5,150,105,.25); color: #34d399;
     display: flex; align-items: center; justify-content: center;
-    font-size: 10px; flex-shrink: 0;
+    font-size: 9px; flex-shrink: 0;
   }
-
-  .buy-btn {
+  .buy-btn-hotmart {
     display: block; width: 100%;
     background: linear-gradient(135deg, #4338ca, #6d28d9);
-    color: #fff; font-size: 16px; font-weight: 700;
-    padding: 18px; border-radius: 12px; border: none;
+    color: #fff; font-size: 15px; font-weight: 700;
+    padding: 16px; border-radius: 12px; border: none;
     cursor: pointer; text-decoration: none;
     transition: transform .15s, box-shadow .15s;
-    text-align: center;
+    text-align: center; margin-top: 16px;
   }
-  .buy-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(67,56,202,.45); }
-
+  .buy-btn-hotmart:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(67,56,202,.45); }
+  .buy-btn-mp {
+    display: block; width: 100%;
+    background: linear-gradient(135deg, #009ee3, #007eb5);
+    color: #fff; font-size: 15px; font-weight: 700;
+    padding: 16px; border-radius: 12px; border: none;
+    cursor: pointer; text-decoration: none;
+    transition: transform .15s;
+    text-align: center; margin-top: 16px;
+  }
+  .buy-btn-mp:hover { transform: translateY(-2px); }
   .guarantee {
-    margin-top: 16px; font-size: 12px; color: #475569;
+    margin-top: 10px; font-size: 11px; color: #475569;
     display: flex; align-items: center; justify-content: center; gap: 6px;
   }
 
-  /* ── AUTOR ── */
   .author { background: var(--page); }
   .author-card {
     background: var(--white); border: 1px solid var(--line);
@@ -391,17 +407,13 @@
   .author-role { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
   .author-bio { font-size: 14px; color: var(--ink2); line-height: 1.65; }
 
-  /* ── FAQ ── */
   .faq { background: var(--white); }
   .faq-list { max-width: 640px; margin-top: 36px; }
-  .faq-item {
-    border-bottom: 1px solid var(--line); padding: 18px 0;
-  }
+  .faq-item { border-bottom: 1px solid var(--line); padding: 18px 0; }
   .faq-item:last-child { border-bottom: none; }
   .faq-q { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 7px; }
   .faq-a { font-size: 14px; color: var(--ink2); line-height: 1.65; }
 
-  /* ── FOOTER ── */
   footer {
     background: var(--node-bg); padding: 32px 24px;
     text-align: center; border-top: 1px solid rgba(255,255,255,.06);
@@ -415,7 +427,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-brand">⚙️ DPT</div>
-  <a href="https://mpago.la/2YSeQhb" class="nav-cta">Conseguir la guía →</a>
+  <a href="https://go.hotmart.com/F106515098X" class="nav-cta">Conseguir la guía →</a>
 </nav>
 
 <!-- HERO -->
@@ -435,10 +447,12 @@
     <div class="hf-node">🔔 Alerta<br><small>acción automática</small></div>
   </div>
 
-  <a href="https://mpago.la/2YSeQhb" class="hero-cta">
-    📘 Quiero la guía ahora
-  </a>
-  <p class="hero-price">PDF descargable · <strong>Pago único · Sin suscripción</strong></p>
+  <div class="hero-btns">
+    <a href="https://go.hotmart.com/F106515098X" class="btn-hotmart">📘 Comprar con Hotmart — $15.000</a>
+    <div class="btn-divider">o si preferís</div>
+    <a href="https://mpago.la/2YSeQhb" class="btn-mp">💳 Pagar con MercadoPago — $10.000</a>
+  </div>
+  <p class="hero-price"><strong>Pago único · Sin suscripción · PDF descarga inmediata</strong></p>
 </section>
 
 <!-- PROBLEMA -->
@@ -447,7 +461,6 @@
     <span class="eyebrow">¿Te suena familiar?</span>
     <h2 class="section-title">Cada día, horas perdidas<br>en lo mismo de siempre</h2>
     <p class="section-sub">Estas son las tareas que más tiempo roban en PyMEs y negocios pequeños. Todas se pueden automatizar.</p>
-
     <div class="pain-grid">
       <div class="pain-card">
         <div class="pain-emoji">📋</div>
@@ -476,22 +489,10 @@
 <!-- STATS -->
 <div class="stats">
   <div class="stats-grid">
-    <div>
-      <div class="stat-num">73%</div>
-      <div class="stat-lab">de las tareas admin pueden automatizarse hoy</div>
-    </div>
-    <div>
-      <div class="stat-num">6h</div>
-      <div class="stat-lab">promedio semanal perdido en tareas repetitivas</div>
-    </div>
-    <div>
-      <div class="stat-num">$0</div>
-      <div class="stat-lab">costo mensual para arrancar con n8n self-hosted</div>
-    </div>
-    <div>
-      <div class="stat-num">3s</div>
-      <div class="stat-lab">tarda un workflow en procesar una venta completa</div>
-    </div>
+    <div><div class="stat-num">73%</div><div class="stat-lab">de las tareas admin pueden automatizarse hoy</div></div>
+    <div><div class="stat-num">6h</div><div class="stat-lab">promedio semanal perdido en tareas repetitivas</div></div>
+    <div><div class="stat-num">$0</div><div class="stat-lab">costo mensual para arrancar con n8n self-hosted</div></div>
+    <div><div class="stat-num">3s</div><div class="stat-lab">tarda un workflow en procesar una venta completa</div></div>
   </div>
 </div>
 
@@ -500,7 +501,6 @@
   <div class="container">
     <span class="eyebrow">La guía</span>
     <h2 class="section-title">No es un curso. Es un manual<br>para implementar hoy.</h2>
-
     <div class="what-grid">
       <div class="book-mock">
         <div class="book-title">Primeros Pasos en la<br><span>Hiper-Automatización</span></div>
@@ -517,28 +517,12 @@
           <div class="book-ch"><span class="ch-num">+5</span> Capítulos más + Anexos</div>
         </div>
       </div>
-
       <ul class="what-list">
-        <li>
-          <div class="what-icon">📖</div>
-          <div><strong>Lenguaje sin tecnicismos.</strong> Escrito para dueños de negocio, no para ingenieros.</div>
-        </li>
-        <li>
-          <div class="what-icon">🇦🇷</div>
-          <div><strong>Ejemplos argentinos.</strong> Casos reales adaptados a cómo trabajan las PyMEs locales.</div>
-        </li>
-        <li>
-          <div class="what-icon">⚡</div>
-          <div><strong>Aplicable desde el capítulo 3.</strong> Tenés n8n corriendo en menos de 10 minutos.</div>
-        </li>
-        <li>
-          <div class="what-icon">🔄</div>
-          <div><strong>Workflows listos para copiar.</strong> No arrancás de cero, adaptás lo que ya funciona.</div>
-        </li>
-        <li>
-          <div class="what-icon">📈</div>
-          <div><strong>Modelo de negocio incluido.</strong> Cómo cobrar por automatizaciones si querés ofrecerlo como servicio.</div>
-        </li>
+        <li><div class="what-icon">📖</div><div><strong>Lenguaje sin tecnicismos.</strong> Escrito para dueños de negocio, no para ingenieros.</div></li>
+        <li><div class="what-icon">🇦🇷</div><div><strong>Ejemplos argentinos.</strong> Casos reales adaptados a cómo trabajan las PyMEs locales.</div></li>
+        <li><div class="what-icon">⚡</div><div><strong>Aplicable desde el capítulo 3.</strong> Tenés n8n corriendo en menos de 10 minutos.</div></li>
+        <li><div class="what-icon">🔄</div><div><strong>Workflows listos para copiar.</strong> No arrancás de cero, adaptás lo que ya funciona.</div></li>
+        <li><div class="what-icon">📈</div><div><strong>Modelo de negocio incluido.</strong> Cómo cobrar por automatizaciones si querés ofrecerlo como servicio.</div></li>
       </ul>
     </div>
   </div>
@@ -549,39 +533,21 @@
   <div class="container">
     <span class="eyebrow">¿Es para mí?</span>
     <h2 class="section-title">Para cualquiera que pierda<br>tiempo en lo mismo todos los días</h2>
-
     <div class="who-grid">
-      <div class="who-card">
-        <div class="who-icon">🏭</div>
-        <h4>Dueño/a de PyME</h4>
-        <p>Querés que tu equipo deje de hacer cosas que puede hacer una computadora.</p>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">🛍️</div>
-        <h4>Emprendedor/a</h4>
-        <p>Vendés por MercadoLibre, redes o tu tienda y querés que la post-venta sea automática.</p>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">💼</div>
-        <h4>Profesional independiente</h4>
-        <p>Abogado, contador, diseñador — tus procesos administrativos pueden trabajar solos.</p>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">⚙️</div>
-        <h4>Técnico / Ingeniero</h4>
-        <p>Conocés los sistemas pero querés aprender a conectarlos y cobrar por eso.</p>
-      </div>
+      <div class="who-card"><div class="who-icon">🏭</div><h4>Dueño/a de PyME</h4><p>Querés que tu equipo deje de hacer cosas que puede hacer una computadora.</p></div>
+      <div class="who-card"><div class="who-icon">🛍️</div><h4>Emprendedor/a</h4><p>Vendés por MercadoLibre, redes o tu tienda y querés que la post-venta sea automática.</p></div>
+      <div class="who-card"><div class="who-icon">💼</div><h4>Profesional independiente</h4><p>Abogado, contador, diseñador — tus procesos administrativos pueden trabajar solos.</p></div>
+      <div class="who-card"><div class="who-icon">⚙️</div><h4>Técnico / Ingeniero</h4><p>Conocés los sistemas pero querés aprender a conectarlos y cobrar por eso.</p></div>
     </div>
   </div>
 </section>
 
-<!-- CÓMO FUNCIONA -->
+<!-- FLOW -->
 <section class="flow-section">
   <div class="container">
     <span class="eyebrow">El resultado final</span>
     <h2 class="section-title">Un sistema que trabaja<br>mientras vos no estás</h2>
     <p class="section-sub">Esto es lo que podés armar después de leer la guía. Un flujo completo de principio a fin, sin intervención humana.</p>
-
     <div class="flow-visual">
       <div class="fv-node fv-1">📝 Trigger<small>formulario / venta / mail</small></div>
       <div class="fv-arrow">→</div>
@@ -601,7 +567,6 @@
   <div class="container">
     <span class="eyebrow">Contenido completo</span>
     <h2 class="section-title">13 capítulos + anexos</h2>
-
     <div class="parts-grid">
       <div class="part-card">
         <div class="part-header p1">Parte 1 · Las bases</div>
@@ -644,27 +609,40 @@
 <!-- PRECIO -->
 <section class="pricing">
   <div class="container">
-    <span class="eyebrow" style="color:#818cf8">Precio único</span>
+    <span class="eyebrow" style="color:#818cf8">Elegí cómo comprarlo</span>
     <h2 class="section-title" style="color:#fff">Una inversión que se paga<br>en la primera hora ahorrada</h2>
 
-    <div class="price-card">
-      <div style="font-size:13px;color:#64748b;margin-bottom:8px">Primeros Pasos en la Hiper-Automatización</div>
-      <div class="price-tag"><span class="price-currency">$</span>10.000</div>
-      <div class="price-period">ARS · Pago único · PDF descarga inmediata</div>
+    <div class="price-cards">
+      <!-- HOTMART -->
+      <div class="price-card featured">
+        <div class="price-badge">Recomendado</div>
+        <div class="price-platform">Hotmart</div>
+        <div class="price-tag"><span class="price-currency">$</span>15.000</div>
+        <div class="price-period">ARS · Pago único · PDF descarga inmediata</div>
+        <ul class="price-includes">
+          <li><span class="pi-check">✓</span> 13 capítulos + 3 anexos</li>
+          <li><span class="pi-check">✓</span> Garantía de devolución 7 días</li>
+          <li><span class="pi-check">✓</span> Tarjeta, MP, transferencia</li>
+          <li><span class="pi-check">✓</span> Actualizaciones sin costo</li>
+        </ul>
+        <a href="https://go.hotmart.com/F106515098X" class="buy-btn-hotmart">📘 Comprar con Hotmart</a>
+        <div class="guarantee">🔒 Plataforma segura · Entrega automática</div>
+      </div>
 
-      <ul class="price-includes">
-        <li><span class="pi-check">✓</span> 13 capítulos + 3 anexos (~100 páginas)</li>
-        <li><span class="pi-check">✓</span> Ejemplos con casos argentinos reales</li>
-        <li><span class="pi-check">✓</span> Workflows listos para importar en n8n</li>
-        <li><span class="pi-check">✓</span> Checklist: ¿mi proceso está listo?</li>
-        <li><span class="pi-check">✓</span> Modelo de negocio para ofrecer el servicio</li>
-        <li><span class="pi-check">✓</span> Actualizaciones futuras sin costo extra</li>
-      </ul>
-
-      <a href="https://mpago.la/2YSeQhb" class="buy-btn">
-        📘 Comprar ahora con MercadoPago
-      </a>
-      <div class="guarantee">🔒 Pago seguro · Descarga inmediata al correo</div>
+      <!-- MERCADOPAGO -->
+      <div class="price-card">
+        <div class="price-platform">MercadoPago</div>
+        <div class="price-tag"><span class="price-currency">$</span>10.000</div>
+        <div class="price-period">ARS · Pago único · PDF descarga inmediata</div>
+        <ul class="price-includes">
+          <li><span class="pi-check">✓</span> 13 capítulos + 3 anexos</li>
+          <li><span class="pi-check">✓</span> Tarjeta o transferencia MP</li>
+          <li><span class="pi-check">✓</span> PDF al mail en minutos</li>
+          <li><span class="pi-check">✓</span> Actualizaciones sin costo</li>
+        </ul>
+        <a href="https://mpago.la/2YSeQhb" class="buy-btn-mp">💳 Pagar con MercadoPago</a>
+        <div class="guarantee">🔒 Pago seguro · Entrega automática</div>
+      </div>
     </div>
   </div>
 </section>
@@ -674,7 +652,6 @@
   <div class="container">
     <span class="eyebrow">Quién lo escribió</span>
     <h2 class="section-title" style="margin-bottom:32px">Escrito por alguien<br>que lo implementa todos los días</h2>
-
     <div class="author-card">
       <div class="author-avatar">AL</div>
       <div>
@@ -691,7 +668,6 @@
   <div class="container">
     <span class="eyebrow">Preguntas frecuentes</span>
     <h2 class="section-title">Dudas comunes</h2>
-
     <div class="faq-list">
       <div class="faq-item">
         <div class="faq-q">¿Necesito saber programar?</div>
@@ -721,9 +697,10 @@
 <section style="background:var(--node-bg);padding:64px 24px;text-align:center">
   <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,4vw,36px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:16px">¿Seguís haciendo todo a mano?</h2>
   <p style="color:#64748b;font-size:16px;margin-bottom:36px">La automatización no reemplaza personas. Las libera para hacer lo que solo ellas pueden hacer.</p>
-  <a href="https://mpago.la/2YSeQhb" class="hero-cta" style="display:inline-flex">
-    📘 Empezar ahora →
-  </a>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+    <a href="https://go.hotmart.com/F106515098X" class="btn-hotmart">📘 Comprar con Hotmart — $15.000</a>
+    <a href="https://mpago.la/2YSeQhb" class="btn-mp">💳 MercadoPago — $10.000</a>
+  </div>
 </section>
 
 <!-- FOOTER -->
@@ -737,4 +714,3 @@
 
 </body>
 </html>
-
