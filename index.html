@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Primeros Pasos en la Hiper-Automatización — DPT</title>
+<title>DPT — Guías de Automatización Industrial</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500&display=swap');
 
@@ -25,7 +25,6 @@
   }
 
   html { scroll-behavior: smooth; }
-
   body {
     font-family: 'Inter', sans-serif;
     background: var(--page);
@@ -55,6 +54,7 @@
   }
   .nav-cta:hover { background: var(--accent2); }
 
+  /* HERO */
   .hero {
     background: var(--node-bg);
     padding: 80px 24px 72px;
@@ -99,60 +99,77 @@
     background-clip: text;
   }
   .hero-sub {
-    color: #94a3b8; font-size: 17px; max-width: 520px;
-    margin: 0 auto 36px; position: relative; line-height: 1.65;
+    color: #94a3b8; font-size: 17px; max-width: 540px;
+    margin: 0 auto 48px; position: relative; line-height: 1.65;
   }
-  .hero-flow {
-    display: flex; align-items: center; justify-content: center;
-    gap: 0; flex-wrap: nowrap;
-    margin: 0 auto 44px; max-width: 640px;
+
+  /* CATÁLOGO en hero */
+  .hero-catalog {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 780px;
+    margin: 0 auto;
     position: relative;
   }
-  .hf-node {
-    border-radius: 10px; padding: 10px 14px;
-    font-size: 12px; font-weight: 600; color: #fff;
-    min-width: 88px; text-align: center;
-    line-height: 1.3;
-    animation: nodein .5s ease both;
-  }
-  .hf-node:nth-child(1) { animation-delay:.1s; background: linear-gradient(135deg,#7c3aed,#4338ca); }
-  .hf-node:nth-child(3) { animation-delay:.25s; background: linear-gradient(135deg,#0891b2,#06b6d4); }
-  .hf-node:nth-child(5) { animation-delay:.4s; background: linear-gradient(135deg,#059669,#10b981); }
-  .hf-node:nth-child(7) { animation-delay:.55s; background: linear-gradient(135deg,#d97706,#f59e0b); }
-  @keyframes nodein { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
-  .hf-arrow { color: rgba(255,255,255,.3); font-size: 18px; margin: 0 4px; flex-shrink: 0; }
+  @media(max-width:640px){ .hero-catalog { grid-template-columns: 1fr; } }
 
-  /* BOTONES HERO */
-  .hero-btns { display: flex; flex-direction: column; align-items: center; gap: 12px; position: relative; }
-  .btn-hotmart {
-    display: inline-flex; align-items: center; gap: 10px;
+  .hero-product {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: left;
+    transition: border-color .2s;
+  }
+  .hero-product:hover { border-color: rgba(99,102,241,.5); }
+  .hero-product.featured { border-color: rgba(99,102,241,.4); background: rgba(99,102,241,.1); }
+
+  .hp-badge {
+    display: inline-block;
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 3px 10px; border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  .hp-badge.new { background: rgba(16,185,129,.2); color: #34d399; }
+  .hp-badge.hot { background: rgba(239,68,68,.2); color: #f87171; }
+
+  .hp-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px; font-weight: 700; color: #fff;
+    margin-bottom: 6px; line-height: 1.3;
+  }
+  .hp-desc { font-size: 12px; color: #64748b; margin-bottom: 16px; line-height: 1.5; }
+  .hp-price {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px; font-weight: 700; color: #fff;
+    margin-bottom: 14px;
+  }
+  .hp-price span { font-size: 14px; color: #818cf8; }
+
+  .hp-btn-hotmart {
+    display: block; width: 100%; text-align: center;
     background: linear-gradient(135deg, #4338ca, #6d28d9);
-    color: #fff; font-size: 16px; font-weight: 700;
-    padding: 16px 36px; border-radius: 12px; border: none;
-    cursor: pointer; text-decoration: none;
-    transition: transform .15s, box-shadow .15s;
-    width: 320px; justify-content: center;
-  }
-  .btn-hotmart:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(67,56,202,.4); }
-  .btn-mp {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: linear-gradient(135deg, #009ee3, #007eb5);
-    color: #fff; font-size: 14px; font-weight: 600;
-    padding: 13px 28px; border-radius: 10px; border: none;
-    cursor: pointer; text-decoration: none;
+    color: #fff; font-size: 13px; font-weight: 700;
+    padding: 12px; border-radius: 10px;
+    text-decoration: none; margin-bottom: 8px;
     transition: transform .15s;
-    width: 320px; justify-content: center;
   }
-  .btn-mp:hover { transform: translateY(-2px); }
-  .btn-divider {
-    color: #475569; font-size: 12px; position: relative;
-  }
-  .hero-price {
-    margin-top: 10px; position: relative;
-    color: #64748b; font-size: 12px;
-  }
-  .hero-price strong { color: #a5b4fc; }
+  .hp-btn-hotmart:hover { transform: translateY(-1px); }
 
+  .hp-btn-mp {
+    display: block; width: 100%; text-align: center;
+    background: linear-gradient(135deg, #009ee3, #007eb5);
+    color: #fff; font-size: 12px; font-weight: 600;
+    padding: 10px; border-radius: 8px;
+    text-decoration: none;
+    transition: transform .15s;
+  }
+  .hp-btn-mp:hover { transform: translateY(-1px); }
+
+  .hp-separator { font-size: 11px; color: #334155; text-align: center; margin: 6px 0; }
+
+  /* SECCIONES */
   section { padding: 72px 24px; }
   .container { max-width: 960px; margin: 0 auto; }
 
@@ -169,93 +186,83 @@
     letter-spacing: -0.8px; color: var(--ink);
     margin-bottom: 16px;
   }
-  .section-sub {
-    font-size: 16px; color: var(--ink2);
-    max-width: 560px; line-height: 1.7;
-  }
+  .section-sub { font-size: 16px; color: var(--ink2); max-width: 560px; line-height: 1.7; }
 
-  .problem { background: var(--white); }
-  .pain-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px; margin-top: 40px;
-  }
-  .pain-card {
-    border: 1px solid var(--line); border-radius: 12px;
-    padding: 20px; background: var(--page);
-    border-left: 4px solid var(--warn);
-  }
-  .pain-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
-  .pain-card p { font-size: 13px; color: var(--ink2); line-height: 1.55; }
-  .pain-emoji { font-size: 22px; margin-bottom: 8px; }
-
-  .what { background: var(--page); }
-  .what-grid {
+  /* CARDS DE PRODUCTO detalladas */
+  .products { background: var(--white); }
+  .product-cards {
     display: grid; grid-template-columns: 1fr 1fr;
-    gap: 48px; align-items: center; margin-top: 48px;
+    gap: 24px; margin-top: 48px;
   }
-  @media(max-width:640px){ .what-grid { grid-template-columns:1fr; gap:32px; } }
-  .book-mock {
-    background: var(--node-bg);
-    border-radius: 16px; padding: 32px 28px;
-    position: relative; overflow: hidden;
-  }
-  .book-mock::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(99,102,241,.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(99,102,241,.1) 1px, transparent 1px);
-    background-size: 28px 28px;
-  }
-  .book-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 20px; font-weight: 700; color: #fff;
-    line-height: 1.2; margin-bottom: 8px; position: relative;
-  }
-  .book-title span { color: #818cf8; }
-  .book-sub { color: #64748b; font-size: 12px; position: relative; margin-bottom: 20px; }
-  .book-chapters { position: relative; }
-  .book-ch {
-    display: flex; align-items: center; gap: 10px;
-    padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,.06);
-    font-size: 12px; color: #94a3b8;
-  }
-  .book-ch:last-child { border-bottom: none; }
-  .ch-num {
-    width: 20px; height: 20px; border-radius: 5px;
-    background: rgba(99,102,241,.3); color: #a5b4fc;
-    font-size: 10px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .what-list { list-style: none; }
-  .what-list li {
-    display: flex; gap: 12px; align-items: flex-start;
-    padding: 12px 0; border-bottom: 1px solid var(--line);
-    font-size: 15px; color: var(--ink2);
-  }
-  .what-list li:last-child { border-bottom: none; }
-  .what-icon {
-    width: 28px; height: 28px; border-radius: 7px;
-    background: #ede9fe; color: var(--accent);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px; flex-shrink: 0; margin-top: 1px;
-  }
+  @media(max-width:640px){ .product-cards { grid-template-columns: 1fr; } }
 
-  .who { background: var(--white); }
-  .who-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 14px; margin-top: 40px;
-  }
-  .who-card {
-    border: 1px solid var(--line); border-radius: 12px; padding: 20px;
+  .product-card {
+    border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
     background: var(--page);
   }
-  .who-icon { font-size: 26px; margin-bottom: 10px; }
-  .who-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 5px; }
-  .who-card p { font-size: 13px; color: var(--ink2); line-height: 1.5; }
+  .product-card.featured { border-color: #818cf8; }
 
+  .pc-header {
+    padding: 20px 24px;
+    position: relative;
+  }
+  .pc-header.p1 { background: linear-gradient(135deg, #1a1f6e, #4338ca); }
+  .pc-header.p2 { background: linear-gradient(135deg, #064E3B, #059669); }
+
+  .pc-tag {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,.6);
+    margin-bottom: 8px;
+  }
+  .pc-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px; font-weight: 700; color: #fff;
+    line-height: 1.2;
+  }
+  .pc-body { padding: 20px 24px; }
+  .pc-desc { font-size: 14px; color: var(--ink2); line-height: 1.65; margin-bottom: 16px; }
+
+  .pc-features { list-style: none; margin-bottom: 20px; }
+  .pc-features li {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--ink2);
+    padding: 5px 0; border-bottom: 1px solid var(--line);
+  }
+  .pc-features li:last-child { border-bottom: none; }
+  .pc-check { color: var(--green); font-size: 12px; flex-shrink: 0; }
+
+  .pc-price-row {
+    display: flex; align-items: baseline; gap: 4px;
+    margin-bottom: 16px;
+  }
+  .pc-price {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 36px; font-weight: 700; color: var(--ink);
+  }
+  .pc-price-label { font-size: 13px; color: var(--muted); }
+
+  .pc-btn-hotmart {
+    display: block; width: 100%; text-align: center;
+    background: linear-gradient(135deg, #4338ca, #6d28d9);
+    color: #fff; font-size: 14px; font-weight: 700;
+    padding: 14px; border-radius: 10px;
+    text-decoration: none; margin-bottom: 10px;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .pc-btn-hotmart:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(67,56,202,.35); }
+
+  .pc-btn-mp {
+    display: block; width: 100%; text-align: center;
+    background: linear-gradient(135deg, #009ee3, #007eb5);
+    color: #fff; font-size: 13px; font-weight: 600;
+    padding: 12px; border-radius: 10px;
+    text-decoration: none;
+    transition: transform .15s;
+  }
+  .pc-btn-mp:hover { transform: translateY(-1px); }
+  .pc-sep { font-size: 11px; color: var(--muted); text-align: center; margin: 6px 0; }
+
+  /* STATS */
   .stats { background: var(--node-bg); padding: 56px 24px; }
   .stats-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -270,124 +277,7 @@
   }
   .stat-lab { color: #64748b; font-size: 13px; margin-top: 6px; line-height: 1.4; }
 
-  .content { background: var(--page); }
-  .parts-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px; margin-top: 40px;
-  }
-  .part-card {
-    background: var(--white); border: 1px solid var(--line);
-    border-radius: 12px; overflow: hidden;
-  }
-  .part-header {
-    padding: 14px 18px;
-    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
-    text-transform: uppercase; color: var(--white);
-  }
-  .part-header.p1 { background: linear-gradient(135deg, #4338ca, #6d28d9); }
-  .part-header.p2 { background: linear-gradient(135deg, #0891b2, #059669); }
-  .part-header.p3 { background: linear-gradient(135deg, #059669, #0f766e); }
-  .part-header.p4 { background: linear-gradient(135deg, #d97706, #dc2626); }
-  .part-body { padding: 14px 18px; }
-  .part-ch {
-    font-size: 12px; color: var(--ink2); padding: 5px 0;
-    border-bottom: 1px solid var(--line); line-height: 1.4;
-  }
-  .part-ch:last-child { border-bottom: none; }
-
-  .flow-section { background: var(--white); }
-  .flow-visual {
-    display: flex; align-items: center; justify-content: center;
-    flex-wrap: wrap; gap: 4px; margin-top: 40px;
-  }
-  .fv-node {
-    border-radius: 10px; padding: 12px 16px;
-    text-align: center; min-width: 110px;
-    font-size: 12px; font-weight: 600; color: #fff;
-  }
-  .fv-node small { display: block; font-weight: 400; opacity: .75; font-size: 10px; margin-top: 2px; }
-  .fv-arrow { font-size: 20px; color: var(--muted); margin: 0 2px; }
-  .fv-1 { background: linear-gradient(135deg,#7c3aed,#4338ca); }
-  .fv-2 { background: linear-gradient(135deg,#0891b2,#06b6d4); }
-  .fv-3 { background: linear-gradient(135deg,#059669,#10b981); }
-  .fv-4 { background: linear-gradient(135deg,#d97706,#f59e0b); }
-  .fv-5 { background: linear-gradient(135deg,#db2777,#e11d48); }
-
-  /* SECCIÓN PRECIO */
-  .pricing { background: var(--node-bg); padding: 80px 24px; text-align: center; }
-  .price-cards {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 20px; max-width: 760px; margin: 40px auto 0;
-  }
-  @media(max-width:600px){ .price-cards { grid-template-columns: 1fr; } }
-
-  .price-card {
-    background: rgba(255,255,255,.05);
-    border: 1px solid rgba(99,102,241,.35);
-    border-radius: 20px; padding: 36px 28px;
-    text-align: center;
-  }
-  .price-card.featured {
-    border-color: #818cf8;
-    background: rgba(99,102,241,.12);
-    position: relative;
-  }
-  .price-badge {
-    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-    background: linear-gradient(135deg, #4338ca, #6d28d9);
-    color: white; font-size: 11px; font-weight: 700;
-    padding: 4px 16px; border-radius: 20px; white-space: nowrap;
-  }
-  .price-platform { font-size: 12px; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-  .price-tag {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 52px; font-weight: 700; color: #fff;
-    line-height: 1;
-  }
-  .price-currency { font-size: 24px; color: #818cf8; vertical-align: super; }
-  .price-period { font-size: 13px; color: #64748b; margin-top: 4px; margin-bottom: 20px; }
-  .price-includes {
-    list-style: none; margin: 20px 0;
-    text-align: left; border-top: 1px solid rgba(255,255,255,.08);
-    padding-top: 20px;
-  }
-  .price-includes li {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 13px; color: #94a3b8;
-    padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.06);
-  }
-  .price-includes li:last-child { border-bottom: none; }
-  .pi-check {
-    width: 16px; height: 16px; border-radius: 50%;
-    background: rgba(5,150,105,.25); color: #34d399;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 9px; flex-shrink: 0;
-  }
-  .buy-btn-hotmart {
-    display: block; width: 100%;
-    background: linear-gradient(135deg, #4338ca, #6d28d9);
-    color: #fff; font-size: 15px; font-weight: 700;
-    padding: 16px; border-radius: 12px; border: none;
-    cursor: pointer; text-decoration: none;
-    transition: transform .15s, box-shadow .15s;
-    text-align: center; margin-top: 16px;
-  }
-  .buy-btn-hotmart:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(67,56,202,.45); }
-  .buy-btn-mp {
-    display: block; width: 100%;
-    background: linear-gradient(135deg, #009ee3, #007eb5);
-    color: #fff; font-size: 15px; font-weight: 700;
-    padding: 16px; border-radius: 12px; border: none;
-    cursor: pointer; text-decoration: none;
-    transition: transform .15s;
-    text-align: center; margin-top: 16px;
-  }
-  .buy-btn-mp:hover { transform: translateY(-2px); }
-  .guarantee {
-    margin-top: 10px; font-size: 11px; color: #475569;
-    display: flex; align-items: center; justify-content: center; gap: 6px;
-  }
-
+  /* AUTOR */
   .author { background: var(--page); }
   .author-card {
     background: var(--white); border: 1px solid var(--line);
@@ -407,6 +297,7 @@
   .author-role { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
   .author-bio { font-size: 14px; color: var(--ink2); line-height: 1.65; }
 
+  /* FAQ */
   .faq { background: var(--white); }
   .faq-list { max-width: 640px; margin-top: 36px; }
   .faq-item { border-bottom: 1px solid var(--line); padding: 18px 0; }
@@ -427,222 +318,110 @@
 <!-- NAV -->
 <nav>
   <div class="nav-brand">⚙️ DPT</div>
-  <a href="https://go.hotmart.com/F106515098X" class="nav-cta">Conseguir la guía →</a>
+  <a href="#productos" class="nav-cta">Ver guías →</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-grid"></div>
-  <div class="hero-badge"><span class="badge-dot"></span>Disponible ahora · Descarga instantánea</div>
-  <h1>Tu empresa trabajando<br><em>mientras dormís</em></h1>
-  <p class="hero-sub">La guía práctica para automatizar procesos completos con Google Workspace y n8n. Sin saber programar. Sin pagar caro.</p>
+  <div class="hero-badge"><span class="badge-dot"></span>2 guías disponibles · Descarga instantánea</div>
+  <h1>Automatizá tu negocio<br><em>desde hoy mismo</em></h1>
+  <p class="hero-sub">Guías prácticas de automatización con Google Workspace y n8n. Sin saber programar. Con ejemplos reales de industria argentina.</p>
 
-  <div class="hero-flow">
-    <div class="hf-node">📝 Formulario<br><small>entrada de datos</small></div>
-    <div class="hf-arrow">→</div>
-    <div class="hf-node">📊 Google<br><small>registra todo</small></div>
-    <div class="hf-arrow">→</div>
-    <div class="hf-node">⚙️ n8n<br><small>procesa</small></div>
-    <div class="hf-arrow">→</div>
-    <div class="hf-node">🔔 Alerta<br><small>acción automática</small></div>
-  </div>
+  <div class="hero-catalog">
 
-  <div class="hero-btns">
-    <a href="https://go.hotmart.com/F106515098X" class="btn-hotmart">📘 Comprar con Hotmart — $15.000</a>
-    <div class="btn-divider">o si preferís</div>
-    <a href="https://mpago.la/2YSeQhb" class="btn-mp">💳 Pagar con MercadoPago — $10.000</a>
-  </div>
-  <p class="hero-price"><strong>Pago único · Sin suscripción · PDF descarga inmediata</strong></p>
-</section>
-
-<!-- PROBLEMA -->
-<section class="problem">
-  <div class="container">
-    <span class="eyebrow">¿Te suena familiar?</span>
-    <h2 class="section-title">Cada día, horas perdidas<br>en lo mismo de siempre</h2>
-    <p class="section-sub">Estas son las tareas que más tiempo roban en PyMEs y negocios pequeños. Todas se pueden automatizar.</p>
-    <div class="pain-grid">
-      <div class="pain-card">
-        <div class="pain-emoji">📋</div>
-        <h4>Copiar datos a mano</h4>
-        <p>Pasás información de un formulario a una planilla, de una planilla a un mail. Una y otra vez.</p>
-      </div>
-      <div class="pain-card">
-        <div class="pain-emoji">📧</div>
-        <h4>Mails repetidos</h4>
-        <p>Siempre el mismo mail de confirmación, bienvenida o recordatorio. Editado a mano cada vez.</p>
-      </div>
-      <div class="pain-card">
-        <div class="pain-emoji">📊</div>
-        <h4>Reportes manuales</h4>
-        <p>El lunes a la mañana copiando números de un lado al otro para mandar el reporte semanal.</p>
-      </div>
-      <div class="pain-card">
-        <div class="pain-emoji">🗂️</div>
-        <h4>Archivos sin orden</h4>
-        <p>Facturas, presupuestos y contratos guardados en carpetas que nadie sabe cómo organizar.</p>
-      </div>
+    <!-- GUÍA 1 -->
+    <div class="hero-product featured">
+      <span class="hp-badge hot">Más vendida</span>
+      <div class="hp-title">Primeros Pasos en la Hiper-Automatización</div>
+      <div class="hp-desc">Google Workspace + n8n para PyMEs, emprendedores y profesionales</div>
+      <div class="hp-price"><span>$</span>15.000 <span style="font-size:12px;color:#64748b">via Hotmart</span></div>
+      <a href="https://go.hotmart.com/F106515098X" class="hp-btn-hotmart">📘 Comprar con Hotmart</a>
+      <div class="hp-separator">o pagá</div>
+      <a href="https://mpago.la/2YSeQhb" class="hp-btn-mp">💳 MercadoPago — $10.000</a>
     </div>
+
+    <!-- GUÍA 2 -->
+    <div class="hero-product">
+      <span class="hp-badge new">Nueva</span>
+      <div class="hp-title">Rondas Digitales Industriales</div>
+      <div class="hp-desc">Control de procesos en planta con QR + Forms + n8n. Costo cero.</div>
+      <div class="hp-price"><span>$</span>25.000 <span style="font-size:12px;color:#64748b">via Hotmart</span></div>
+      <a href="https://go.hotmart.com/J106533330R" class="hp-btn-hotmart">🏭 Comprar con Hotmart</a>
+    </div>
+
   </div>
 </section>
 
 <!-- STATS -->
 <div class="stats">
   <div class="stats-grid">
-    <div><div class="stat-num">73%</div><div class="stat-lab">de las tareas admin pueden automatizarse hoy</div></div>
-    <div><div class="stat-num">6h</div><div class="stat-lab">promedio semanal perdido en tareas repetitivas</div></div>
-    <div><div class="stat-num">$0</div><div class="stat-lab">costo mensual para arrancar con n8n self-hosted</div></div>
-    <div><div class="stat-num">3s</div><div class="stat-lab">tarda un workflow en procesar una venta completa</div></div>
+    <div><div class="stat-num">2</div><div class="stat-lab">guías disponibles con casos reales</div></div>
+    <div><div class="stat-num">$0</div><div class="stat-lab">costo de herramientas para implementar</div></div>
+    <div><div class="stat-num">6h</div><div class="stat-lab">promedio semanal que se recupera automatizando</div></div>
+    <div><div class="stat-num">AR</div><div class="stat-lab">ejemplos adaptados a la industria argentina</div></div>
   </div>
 </div>
 
-<!-- QUÉ ES -->
-<section class="what">
+<!-- PRODUCTOS DETALLADOS -->
+<section class="products" id="productos">
   <div class="container">
-    <span class="eyebrow">La guía</span>
-    <h2 class="section-title">No es un curso. Es un manual<br>para implementar hoy.</h2>
-    <div class="what-grid">
-      <div class="book-mock">
-        <div class="book-title">Primeros Pasos en la<br><span>Hiper-Automatización</span></div>
-        <div class="book-sub">DPT · Desarrollos y Procesos Técnicos · PDF · ~100 páginas</div>
-        <div class="book-chapters">
-          <div class="book-ch"><span class="ch-num">1</span> ¿Qué es la hiper-automatización?</div>
-          <div class="book-ch"><span class="ch-num">2</span> Google Workspace como base</div>
-          <div class="book-ch"><span class="ch-num">3</span> Conocé n8n: tu motor</div>
-          <div class="book-ch"><span class="ch-num">4</span> Formulario → Alerta automática</div>
-          <div class="book-ch"><span class="ch-num">5</span> Reportes sin tocar nada</div>
-          <div class="book-ch"><span class="ch-num">6</span> Drive sin intervención</div>
-          <div class="book-ch"><span class="ch-num">7</span> Webhooks y conexiones</div>
-          <div class="book-ch"><span class="ch-num">8</span> IA integrada en tus flujos</div>
-          <div class="book-ch"><span class="ch-num">+5</span> Capítulos más + Anexos</div>
+    <span class="eyebrow">Catálogo DPT</span>
+    <h2 class="section-title">Dos guías para dos<br>tipos de problema</h2>
+    <p class="section-sub">Una para digitalizar cualquier negocio. Otra para controlar procesos industriales en planta. Las dos con las mismas herramientas gratuitas.</p>
+
+    <div class="product-cards">
+
+      <!-- PRODUCTO 1 -->
+      <div class="product-card featured">
+        <div class="pc-header p1">
+          <div class="pc-tag">Guía 1 · Gestión y ventas</div>
+          <div class="pc-title">Primeros Pasos en la<br>Hiper-Automatización</div>
+        </div>
+        <div class="pc-body">
+          <p class="pc-desc">La guía práctica para automatizar procesos completos de negocio: ventas, reportes, atención al cliente y más. Con Google Workspace y n8n.</p>
+          <ul class="pc-features">
+            <li><span class="pc-check">✓</span> 13 capítulos + 3 anexos (~100 páginas)</li>
+            <li><span class="pc-check">✓</span> Workflows listos para importar en n8n</li>
+            <li><span class="pc-check">✓</span> Integración con MercadoPago</li>
+            <li><span class="pc-check">✓</span> Casos argentinos reales</li>
+            <li><span class="pc-check">✓</span> Modelo de negocio para vender servicios</li>
+            <li><span class="pc-check">✓</span> Actualizaciones sin costo extra</li>
+          </ul>
+          <div class="pc-price-row">
+            <div class="pc-price">$15.000</div>
+            <div class="pc-price-label">ARS · Hotmart</div>
+          </div>
+          <a href="https://go.hotmart.com/F106515098X" class="pc-btn-hotmart">📘 Comprar con Hotmart</a>
+          <div class="pc-sep">o si preferís</div>
+          <a href="https://mpago.la/2YSeQhb" class="pc-btn-mp">💳 MercadoPago — $10.000</a>
         </div>
       </div>
-      <ul class="what-list">
-        <li><div class="what-icon">📖</div><div><strong>Lenguaje sin tecnicismos.</strong> Escrito para dueños de negocio, no para ingenieros.</div></li>
-        <li><div class="what-icon">🇦🇷</div><div><strong>Ejemplos argentinos.</strong> Casos reales adaptados a cómo trabajan las PyMEs locales.</div></li>
-        <li><div class="what-icon">⚡</div><div><strong>Aplicable desde el capítulo 3.</strong> Tenés n8n corriendo en menos de 10 minutos.</div></li>
-        <li><div class="what-icon">🔄</div><div><strong>Workflows listos para copiar.</strong> No arrancás de cero, adaptás lo que ya funciona.</div></li>
-        <li><div class="what-icon">📈</div><div><strong>Modelo de negocio incluido.</strong> Cómo cobrar por automatizaciones si querés ofrecerlo como servicio.</div></li>
-      </ul>
-    </div>
-  </div>
-</section>
 
-<!-- PARA QUIÉN -->
-<section class="who">
-  <div class="container">
-    <span class="eyebrow">¿Es para mí?</span>
-    <h2 class="section-title">Para cualquiera que pierda<br>tiempo en lo mismo todos los días</h2>
-    <div class="who-grid">
-      <div class="who-card"><div class="who-icon">🏭</div><h4>Dueño/a de PyME</h4><p>Querés que tu equipo deje de hacer cosas que puede hacer una computadora.</p></div>
-      <div class="who-card"><div class="who-icon">🛍️</div><h4>Emprendedor/a</h4><p>Vendés por MercadoLibre, redes o tu tienda y querés que la post-venta sea automática.</p></div>
-      <div class="who-card"><div class="who-icon">💼</div><h4>Profesional independiente</h4><p>Abogado, contador, diseñador — tus procesos administrativos pueden trabajar solos.</p></div>
-      <div class="who-card"><div class="who-icon">⚙️</div><h4>Técnico / Ingeniero</h4><p>Conocés los sistemas pero querés aprender a conectarlos y cobrar por eso.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- FLOW -->
-<section class="flow-section">
-  <div class="container">
-    <span class="eyebrow">El resultado final</span>
-    <h2 class="section-title">Un sistema que trabaja<br>mientras vos no estás</h2>
-    <p class="section-sub">Esto es lo que podés armar después de leer la guía. Un flujo completo de principio a fin, sin intervención humana.</p>
-    <div class="flow-visual">
-      <div class="fv-node fv-1">📝 Trigger<small>formulario / venta / mail</small></div>
-      <div class="fv-arrow">→</div>
-      <div class="fv-node fv-2">📊 Google<small>registra en Sheets</small></div>
-      <div class="fv-arrow">→</div>
-      <div class="fv-node fv-3">⚙️ n8n<small>procesa y decide</small></div>
-      <div class="fv-arrow">→</div>
-      <div class="fv-node fv-4">🔔 Acción<small>mail / WhatsApp / Drive</small></div>
-      <div class="fv-arrow">→</div>
-      <div class="fv-node fv-5">🤖 IA<small>clasifica y responde</small></div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTENIDO -->
-<section class="content">
-  <div class="container">
-    <span class="eyebrow">Contenido completo</span>
-    <h2 class="section-title">13 capítulos + anexos</h2>
-    <div class="parts-grid">
-      <div class="part-card">
-        <div class="part-header p1">Parte 1 · Las bases</div>
-        <div class="part-body">
-          <div class="part-ch">Cap. 1 · Qué es la hiper-automatización</div>
-          <div class="part-ch">Cap. 2 · Google Workspace como base</div>
-          <div class="part-ch">Cap. 3 · Conocé n8n</div>
+      <!-- PRODUCTO 2 -->
+      <div class="product-card">
+        <div class="pc-header p2">
+          <div class="pc-tag">Guía 2 · Control industrial</div>
+          <div class="pc-title">Rondas Digitales<br>Industriales</div>
+        </div>
+        <div class="pc-body">
+          <p class="pc-desc">Sistema de checkpoints físicos con QR para controlar operarios en planta. Reporte automático por turno al supervisor. Costo de implementación: $0.</p>
+          <ul class="pc-features">
+            <li><span class="pc-check">✓</span> 10 capítulos + 2 anexos</li>
+            <li><span class="pc-check">✓</span> QR por estación + Forms + Sheets + n8n</li>
+            <li><span class="pc-check">✓</span> Reporte automático por turno al supervisor</li>
+            <li><span class="pc-check">✓</span> Casos: cable, plástico, alimentos, textil</li>
+            <li><span class="pc-check">✓</span> Modelo de cotización para clientes industriales</li>
+            <li><span class="pc-check">✓</span> Actualizaciones sin costo extra</li>
+          </ul>
+          <div class="pc-price-row">
+            <div class="pc-price">$25.000</div>
+            <div class="pc-price-label">ARS · Hotmart</div>
+          </div>
+          <a href="https://go.hotmart.com/J106533330R" class="pc-btn-hotmart">🏭 Comprar con Hotmart</a>
         </div>
       </div>
-      <div class="part-card">
-        <div class="part-header p2">Parte 2 · Práctica</div>
-        <div class="part-body">
-          <div class="part-ch">Cap. 4 · Formulario → Alerta</div>
-          <div class="part-ch">Cap. 5 · Reportes automáticos</div>
-          <div class="part-ch">Cap. 6 · Drive sin intervención</div>
-          <div class="part-ch">Cap. 7 · Webhooks</div>
-          <div class="part-ch">Cap. 8 · IA integrada</div>
-        </div>
-      </div>
-      <div class="part-card">
-        <div class="part-header p3">Parte 3 · Tu sistema</div>
-        <div class="part-body">
-          <div class="part-ch">Cap. 9 · Diseñar flujos inteligentes</div>
-          <div class="part-ch">Cap. 10 · Errores y monitoreo</div>
-          <div class="part-ch">Cap. 11 · Seguridad y buenas prácticas</div>
-        </div>
-      </div>
-      <div class="part-card">
-        <div class="part-header p4">Parte 4 · Negocio</div>
-        <div class="part-body">
-          <div class="part-ch">Cap. 12 · Cómo cobrar servicios</div>
-          <div class="part-ch">Cap. 13 · Casos por industria</div>
-          <div class="part-ch">Anexos · Glosario + Checklist</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- PRECIO -->
-<section class="pricing">
-  <div class="container">
-    <span class="eyebrow" style="color:#818cf8">Elegí cómo comprarlo</span>
-    <h2 class="section-title" style="color:#fff">Una inversión que se paga<br>en la primera hora ahorrada</h2>
-
-    <div class="price-cards">
-      <!-- HOTMART -->
-      <div class="price-card featured">
-        <div class="price-badge">Recomendado</div>
-        <div class="price-platform">Hotmart</div>
-        <div class="price-tag"><span class="price-currency">$</span>15.000</div>
-        <div class="price-period">ARS · Pago único · PDF descarga inmediata</div>
-        <ul class="price-includes">
-          <li><span class="pi-check">✓</span> 13 capítulos + 3 anexos</li>
-          <li><span class="pi-check">✓</span> Garantía de devolución 7 días</li>
-          <li><span class="pi-check">✓</span> Tarjeta, MP, transferencia</li>
-          <li><span class="pi-check">✓</span> Actualizaciones sin costo</li>
-        </ul>
-        <a href="https://go.hotmart.com/F106515098X" class="buy-btn-hotmart">📘 Comprar con Hotmart</a>
-        <div class="guarantee">🔒 Plataforma segura · Entrega automática</div>
-      </div>
-
-      <!-- MERCADOPAGO -->
-      <div class="price-card">
-        <div class="price-platform">MercadoPago</div>
-        <div class="price-tag"><span class="price-currency">$</span>10.000</div>
-        <div class="price-period">ARS · Pago único · PDF descarga inmediata</div>
-        <ul class="price-includes">
-          <li><span class="pi-check">✓</span> 13 capítulos + 3 anexos</li>
-          <li><span class="pi-check">✓</span> Tarjeta o transferencia MP</li>
-          <li><span class="pi-check">✓</span> PDF al mail en minutos</li>
-          <li><span class="pi-check">✓</span> Actualizaciones sin costo</li>
-        </ul>
-        <a href="https://mpago.la/2YSeQhb" class="buy-btn-mp">💳 Pagar con MercadoPago</a>
-        <div class="guarantee">🔒 Pago seguro · Entrega automática</div>
-      </div>
     </div>
   </div>
 </section>
@@ -657,7 +436,7 @@
       <div>
         <div class="author-name">Ale</div>
         <div class="author-role">Gerente de Calidad · Fundador de DPT · Especialista en automatización industrial</div>
-        <div class="author-bio">Trabajo en automatización de procesos industriales y certificación de productos eléctricos. Implementé sistemas de monitoreo con ESP32, Google Sheets y n8n en entornos reales de manufactura. Esta guía es exactamente lo que hubiese necesitado cuando empecé.</div>
+        <div class="author-bio">Trabajo en automatización de procesos industriales y certificación de productos eléctricos. Implementé sistemas de monitoreo con ESP32, Google Sheets y n8n en entornos reales de manufactura — incluyendo el sistema de Rondas Digitales en líneas de extrusión de 40 metros. Estas guías son exactamente lo que hubiese necesitado cuando empecé.</div>
       </div>
     </div>
   </div>
@@ -671,15 +450,15 @@
     <div class="faq-list">
       <div class="faq-item">
         <div class="faq-q">¿Necesito saber programar?</div>
-        <div class="faq-a">No. La guía está pensada para personas sin conocimiento técnico previo. Cuando hay código, está explicado línea por línea con palabras simples.</div>
+        <div class="faq-a">No. Las dos guías están escritas para personas sin conocimiento técnico previo. Cuando hay código, está explicado línea por línea con palabras simples.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">¿Funciona para mi tipo de negocio?</div>
-        <div class="faq-a">Si tenés procesos repetitivos (y casi todos los negocios los tienen), sí. La guía incluye casos de manufactura, comercio, servicios profesionales y logística.</div>
+        <div class="faq-q">¿Para qué tipo de empresa es la guía de Rondas Digitales?</div>
+        <div class="faq-a">Para cualquier empresa con procesos industriales continuos: cable, plástico, alimentos, textil, farmacéutica, automotriz. Si tenés maquinaria larga o múltiples estaciones de control, esta guía es para vos.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">¿Qué herramientas necesito tener?</div>
-        <div class="faq-a">Solo una cuenta de Google (Gmail funciona). n8n tiene versión gratuita en la nube y también se puede instalar gratis en tu propia máquina o un servidor de USD 6/mes.</div>
+        <div class="faq-q">¿Cuánto cuesta implementar el sistema de Rondas Digitales?</div>
+        <div class="faq-a">Costo en licencias: $0. Las herramientas (Google Forms, Sheets, n8n) son gratuitas. El único gasto es imprimir y laminar los QR — menos de $500 ARS por máquina.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">¿Cuándo recibo el PDF?</div>
@@ -698,8 +477,8 @@
   <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,4vw,36px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:16px">¿Seguís haciendo todo a mano?</h2>
   <p style="color:#64748b;font-size:16px;margin-bottom:36px">La automatización no reemplaza personas. Las libera para hacer lo que solo ellas pueden hacer.</p>
   <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
-    <a href="https://go.hotmart.com/F106515098X" class="btn-hotmart">📘 Comprar con Hotmart — $15.000</a>
-    <a href="https://mpago.la/2YSeQhb" class="btn-mp">💳 MercadoPago — $10.000</a>
+    <a href="https://go.hotmart.com/F106515098X" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#4338ca,#6d28d9);color:#fff;font-size:15px;font-weight:700;padding:14px 32px;border-radius:12px;text-decoration:none">📘 Hiper-Automatización — $15.000</a>
+    <a href="https://go.hotmart.com/J106533330R" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#064E3B,#059669);color:#fff;font-size:15px;font-weight:700;padding:14px 32px;border-radius:12px;text-decoration:none">🏭 Rondas Digitales — $25.000</a>
   </div>
 </section>
 
@@ -708,7 +487,7 @@
   <p>
     <strong>DPT · Desarrollos y Procesos Técnicos</strong><br>
     © 2025 · Todos los derechos reservados<br>
-    Consultas: respondé el mail de entrega del PDF
+    Consultas: alejsanchez736@gmail.com
   </p>
 </footer>
 
