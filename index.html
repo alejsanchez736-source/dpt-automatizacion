@@ -103,7 +103,6 @@
     margin: 0 auto 48px; position: relative; line-height: 1.65;
   }
 
-  /* CATÁLOGO en hero */
   .hero-catalog {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -169,7 +168,6 @@
 
   .hp-separator { font-size: 11px; color: #334155; text-align: center; margin: 6px 0; }
 
-  /* SECCIONES */
   section { padding: 72px 24px; }
   .container { max-width: 960px; margin: 0 auto; }
 
@@ -188,7 +186,6 @@
   }
   .section-sub { font-size: 16px; color: var(--ink2); max-width: 560px; line-height: 1.7; }
 
-  /* CARDS DE PRODUCTO detalladas */
   .products { background: var(--white); }
   .product-cards {
     display: grid; grid-template-columns: 1fr 1fr;
@@ -202,10 +199,7 @@
   }
   .product-card.featured { border-color: #818cf8; }
 
-  .pc-header {
-    padding: 20px 24px;
-    position: relative;
-  }
+  .pc-header { padding: 20px 24px; position: relative; }
   .pc-header.p1 { background: linear-gradient(135deg, #1a1f6e, #4338ca); }
   .pc-header.p2 { background: linear-gradient(135deg, #064E3B, #059669); }
 
@@ -277,28 +271,128 @@
   }
   .stat-lab { color: #64748b; font-size: 13px; margin-top: 6px; line-height: 1.4; }
 
-  /* AUTOR */
-  .author { background: var(--page); }
-  .author-card {
-    background: var(--white); border: 1px solid var(--line);
-    border-radius: 16px; padding: 32px;
-    display: flex; gap: 28px; align-items: flex-start;
-    max-width: 640px;
+  /* PROYECTOS */
+  .projects { background: var(--page); }
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px; margin-top: 40px;
   }
-  @media(max-width:520px){ .author-card { flex-direction: column; } }
+  .project-card {
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 14px; overflow: hidden;
+    transition: box-shadow .2s, transform .2s;
+  }
+  .project-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,.08); }
+  .project-card-header {
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .project-tag {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 3px 10px; border-radius: 20px;
+    margin-bottom: 10px; display: inline-block;
+  }
+  .project-tag.monitoring { background: rgba(8,145,178,.12); color: var(--cyan); }
+  .project-tag.maintenance { background: rgba(239,68,68,.12); color: #ef4444; }
+  .project-tag.quality { background: rgba(5,150,105,.12); color: var(--green); }
+  .project-tag.dashboard { background: rgba(109,40,217,.12); color: var(--accent2); }
+
+  .project-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px; font-weight: 700; color: var(--ink);
+    line-height: 1.3; margin-bottom: 4px;
+  }
+  .project-subtitle { font-size: 12px; color: var(--muted); }
+  .project-body { padding: 16px 20px; }
+  .project-desc { font-size: 13px; color: var(--ink2); line-height: 1.6; margin-bottom: 14px; }
+  .project-stack {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .stack-pill {
+    font-size: 10px; font-weight: 600; letter-spacing: .5px;
+    background: var(--page); border: 1px solid var(--line);
+    color: var(--muted); padding: 3px 10px; border-radius: 20px;
+  }
+
+  /* AUTOR */
+  .author { background: var(--white); }
+  .author-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: start; margin-top: 40px;
+  }
+  @media(max-width:700px){ .author-layout { grid-template-columns: 1fr; } }
+
+  .author-card {
+    background: var(--page); border: 1px solid var(--line);
+    border-radius: 16px; padding: 32px;
+  }
+  .author-top {
+    display: flex; gap: 20px; align-items: flex-start; margin-bottom: 20px;
+  }
   .author-avatar {
-    width: 72px; height: 72px; border-radius: 50%;
+    width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0;
     background: linear-gradient(135deg, #4338ca, #06b6d4);
     display: flex; align-items: center; justify-content: center;
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 24px; font-weight: 700; color: #fff; flex-shrink: 0;
+    font-size: 24px; font-weight: 700; color: #fff;
   }
-  .author-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
-  .author-role { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
-  .author-bio { font-size: 14px; color: var(--ink2); line-height: 1.65; }
+  .author-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 4px;
+  }
+  .author-role { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 8px; }
+  .author-bio { font-size: 14px; color: var(--ink2); line-height: 1.7; }
+
+  .author-contact {
+    margin-top: 20px; padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .author-contact-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 12px;
+  }
+  .contact-item {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; color: var(--ink2); margin-bottom: 8px;
+  }
+  .contact-icon {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: var(--white); border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0;
+  }
+  .contact-link { color: var(--accent); text-decoration: none; }
+  .contact-link:hover { text-decoration: underline; }
+
+  .author-skills { }
+  .skills-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px; font-weight: 700; color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .skill-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 16px 0; border-bottom: 1px solid var(--line);
+  }
+  .skill-item:last-child { border-bottom: none; }
+  .skill-icon {
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .skill-icon.purple { background: rgba(109,40,217,.1); }
+  .skill-icon.cyan   { background: rgba(8,145,178,.1); }
+  .skill-icon.green  { background: rgba(5,150,105,.1); }
+  .skill-icon.orange { background: rgba(217,119,6,.1); }
+  .skill-icon.red    { background: rgba(239,68,68,.1); }
+
+  .skill-name {
+    font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 2px;
+  }
+  .skill-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
 
   /* FAQ */
-  .faq { background: var(--white); }
+  .faq { background: var(--page); }
   .faq-list { max-width: 640px; margin-top: 36px; }
   .faq-item { border-bottom: 1px solid var(--line); padding: 18px 0; }
   .faq-item:last-child { border-bottom: none; }
@@ -329,8 +423,6 @@
   <p class="hero-sub">Guías prácticas de automatización con Google Workspace y n8n. Sin saber programar. Con ejemplos reales de industria argentina.</p>
 
   <div class="hero-catalog">
-
-    <!-- GUÍA 1 -->
     <div class="hero-product featured">
       <span class="hp-badge hot">Más vendida</span>
       <div class="hp-title">Primeros Pasos en la Hiper-Automatización</div>
@@ -340,8 +432,6 @@
       <div class="hp-separator">o pagá</div>
       <a href="https://mpago.la/2YSeQhb" class="hp-btn-mp">💳 MercadoPago — $10.000</a>
     </div>
-
-    <!-- GUÍA 2 -->
     <div class="hero-product">
       <span class="hp-badge new">Nueva</span>
       <div class="hp-title">Rondas Digitales Industriales</div>
@@ -351,7 +441,6 @@
       <div class="hp-separator">o pagá</div>
       <a href="https://mpago.la/2W985cG" class="hp-btn-mp">💳 MercadoPago — $20.000</a>
     </div>
-
   </div>
 </section>
 
@@ -373,8 +462,6 @@
     <p class="section-sub">Una para digitalizar cualquier negocio. Otra para controlar procesos industriales en planta. Las dos con las mismas herramientas gratuitas.</p>
 
     <div class="product-cards">
-
-      <!-- PRODUCTO 1 -->
       <div class="product-card featured">
         <div class="pc-header p1">
           <div class="pc-tag">Guía 1 · Gestión y ventas</div>
@@ -400,7 +487,6 @@
         </div>
       </div>
 
-      <!-- PRODUCTO 2 -->
       <div class="product-card">
         <div class="pc-header p2">
           <div class="pc-tag">Guía 2 · Control industrial</div>
@@ -425,6 +511,94 @@
           <a href="https://mpago.la/2W985cG" class="pc-btn-mp">💳 MercadoPago — $20.000</a>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROYECTOS REALES -->
+<section class="projects" id="proyectos">
+  <div class="container">
+    <span class="eyebrow">Proyectos reales implementados</span>
+    <h2 class="section-title">Lo que se ve en las imágenes<br>existe y funciona hoy</h2>
+    <p class="section-sub">Estas no son demos ni maquetas. Son sistemas en producción, corriendo en entornos industriales reales.</p>
+
+    <div class="projects-grid">
+
+      <!-- Dashboard Extrusión -->
+      <div class="project-card">
+        <div class="project-card-header">
+          <span class="project-tag monitoring">Monitoreo en tiempo real</span>
+          <div class="project-title">Dashboard de Status de Extrusión</div>
+          <div class="project-subtitle">12 máquinas · En vivo 24/7</div>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">Panel de control que muestra en tiempo real el estado de todas las extrusoras de la planta: produciendo, próximas a finalizar o detenidas. Cada tarjeta de máquina incluye el código de producción activo, metros restantes, próximos trabajos y fecha estimada de entrega. Se actualiza automáticamente desde Google Sheets.</p>
+          <div class="project-stack">
+            <span class="stack-pill">Google Sheets</span>
+            <span class="stack-pill">Apps Script</span>
+            <span class="stack-pill">Netlify</span>
+            <span class="stack-pill">JavaScript</span>
+            <span class="stack-pill">WebSocket</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sistema de Mantenimiento -->
+      <div class="project-card">
+        <div class="project-card-header">
+          <span class="project-tag maintenance">Mantenimiento industrial</span>
+          <div class="project-title">Sistema de Solicitudes de Mantenimiento</div>
+          <div class="project-subtitle">Alerta multicanal · Trazabilidad completa</div>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">Cuando cualquier operario detecta una falla, genera una solicitud desde su celular, una tablet o un botón físico en la máquina. El sistema dispara automáticamente un mail al sector de mantenimiento y activa una alerta visual en el dashboard central — con colores de urgencia y tiempo transcurrido sin atención. Todo queda registrado con fecha, hora, máquina y motivo para análisis posterior.</p>
+          <div class="project-stack">
+            <span class="stack-pill">n8n</span>
+            <span class="stack-pill">Google Sheets</span>
+            <span class="stack-pill">Gmail</span>
+            <span class="stack-pill">ESP32</span>
+            <span class="stack-pill">Netlify</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medición por Cámara -->
+      <div class="project-card">
+        <div class="project-card-header">
+          <span class="project-tag quality">Control de calidad</span>
+          <div class="project-title">Medición por Cámara — Control Dimensional</div>
+          <div class="project-subtitle">Reemplaza software comercial · Envío a Google Sheets</div>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">Aplicación web de medición dimensional por cámara para control de calidad de cables y probetas. Permite calibrar el aumento, medir espesores con líneas y diámetros con 4 puntos para compensar la ovalación. Cada ensayo con sus mediciones se envía automáticamente a Google Sheets para trazabilidad. Desarrollado a medida para reemplazar software comercial.</p>
+          <div class="project-stack">
+            <span class="stack-pill">WebRTC</span>
+            <span class="stack-pill">Canvas API</span>
+            <span class="stack-pill">Apps Script</span>
+            <span class="stack-pill">Google Sheets</span>
+            <span class="stack-pill">Netlify</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Generación de Dashboards -->
+      <div class="project-card">
+        <div class="project-card-header">
+          <span class="project-tag dashboard">Dashboards a medida</span>
+          <div class="project-title">Generación de Dashboards y Herramientas Digitales</div>
+          <div class="project-subtitle">Para industria, calidad y gestión</div>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">Diseño y desarrollo de dashboards operativos personalizados para plantas industriales y equipos de gestión: KPIs de producción, reportes de no conformidades, seguimiento de OTs, control de calidad y más. Construidos sobre Google Workspace + n8n + Netlify, sin licencias costosas y con datos en tiempo real.</p>
+          <div class="project-stack">
+            <span class="stack-pill">Google Sheets</span>
+            <span class="stack-pill">n8n</span>
+            <span class="stack-pill">Netlify</span>
+            <span class="stack-pill">Apps Script</span>
+            <span class="stack-pill">ESP32</span>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -434,13 +608,82 @@
 <section class="author">
   <div class="container">
     <span class="eyebrow">Quién lo escribió</span>
-    <h2 class="section-title" style="margin-bottom:32px">Escrito por alguien<br>que lo implementa todos los días</h2>
-    <div class="author-card">
-      <div class="author-avatar">AL</div>
-      <div>
-        <div class="author-name">Ale</div>
-        <div class="author-role">Gerente de Calidad · Fundador de DPT · Especialista en automatización industrial</div>
-        <div class="author-bio">Trabajo en automatización de procesos industriales y certificación de productos eléctricos. Implementé sistemas de monitoreo con ESP32, Google Sheets y n8n en entornos reales de manufactura — incluyendo el sistema de Rondas Digitales en líneas de extrusión de 40 metros. Estas guías son exactamente lo que hubiese necesitado cuando empecé.</div>
+    <h2 class="section-title">Escrito por alguien<br>que lo implementa todos los días</h2>
+
+    <div class="author-layout">
+
+      <div class="author-card">
+        <div class="author-top">
+          <div class="author-avatar">AL</div>
+          <div>
+            <div class="author-name">Alejandro Sanchez</div>
+            <div class="author-role">Fundador de DPT · Especialista en Automatización Industrial, Normalización y Certificación de Productos Eléctricos</div>
+          </div>
+        </div>
+        <div class="author-bio">
+          Me especializo en la automatización de procesos industriales, la normalización y la certificación de productos eléctricos. A lo largo de mi trayectoria desarrollé e implementé soluciones de automatización en entornos reales de manufactura, integrando tecnologías como ESP32, Google Sheets y n8n para digitalizar procesos, mejorar la trazabilidad y generar información en tiempo real para la toma de decisiones.
+          <br><br>
+          Entre los proyectos desarrollados se destacan sistemas de Rondas Digitales para líneas de extrusión de más de 40 metros, plataformas de monitoreo de producción, captura automática de datos y herramientas que simplifican la gestión documental y el control de procesos.
+          <br><br>
+          Mi objetivo es transformar tareas complejas en soluciones simples, prácticas y fáciles de implementar, ayudando a las empresas a ganar eficiencia sin necesidad de grandes inversiones. Las guías y proyectos que comparto son, en gran medida, las herramientas que me hubiera gustado tener cuando comencé mi carrera.
+        </div>
+
+        <div class="author-contact">
+          <div class="author-contact-title">Contacto directo</div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <a href="mailto:alejsanchez736@gmail.com" class="contact-link">alejsanchez736@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <a href="https://wa.me/5491569927053" class="contact-link">+54 9 15 6992-7053 (WhatsApp)</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="author-skills">
+        <div class="skills-title">Especialidades</div>
+
+        <div class="skill-item">
+          <div class="skill-icon purple">📊</div>
+          <div>
+            <div class="skill-name">Generación de Dashboards y Herramientas Digitales</div>
+            <div class="skill-desc">Paneles de control operativos a medida para planta, calidad y gestión. Con datos en tiempo real desde Google Sheets, n8n y ESP32.</div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-icon cyan">⚙️</div>
+          <div>
+            <div class="skill-name">Automatización Industrial con ESP32 y n8n</div>
+            <div class="skill-desc">Cuentámetros, sensores de temperatura, pulsadores físicos conectados a sistemas digitales. Hardware + software integrados.</div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-icon green">🔍</div>
+          <div>
+            <div class="skill-name">Control de Calidad Digital</div>
+            <div class="skill-desc">Medición dimensional por cámara, trazabilidad de ensayos, reportes de no conformidades y análisis de defectos automatizados.</div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-icon orange">🏭</div>
+          <div>
+            <div class="skill-name">Sistemas de Monitoreo de Producción</div>
+            <div class="skill-desc">Dashboard de extrusoras en tiempo real, gestión de cola de producción, Gantt operativo y alertas por turno.</div>
+          </div>
+        </div>
+
+        <div class="skill-item">
+          <div class="skill-icon red">🔔</div>
+          <div>
+            <div class="skill-name">Gestión de Mantenimiento con Alertas Multicanal</div>
+            <div class="skill-desc">Solicitudes desde celular, tablet o pulsador físico. Dispara mail automático y alerta visual en dashboard con tiempo sin atención.</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -469,6 +712,10 @@
         <div class="faq-a">Inmediatamente después del pago. Llega a tu mail en minutos de forma automática.</div>
       </div>
       <div class="faq-item">
+        <div class="faq-q">¿Pueden desarrollarme un sistema a medida?</div>
+        <div class="faq-a">Sí. DPT ofrece desarrollo de dashboards, automatizaciones y sistemas industriales personalizados. Escribime a alejsanchez736@gmail.com o por WhatsApp y coordinamos una consulta.</div>
+      </div>
+      <div class="faq-item">
         <div class="faq-q">¿Puedo consultar dudas después de comprarlo?</div>
         <div class="faq-a">Sí. Respondiendo el mail de entrega llegás directo a mí y te respondo personalmente.</div>
       </div>
@@ -484,6 +731,7 @@
     <a href="https://go.hotmart.com/F106515098X" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#4338ca,#6d28d9);color:#fff;font-size:15px;font-weight:700;padding:14px 32px;border-radius:12px;text-decoration:none">📘 Hiper-Automatización — $15.000</a>
     <a href="https://go.hotmart.com/J106533330R" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#064E3B,#059669);color:#fff;font-size:15px;font-weight:700;padding:14px 32px;border-radius:12px;text-decoration:none">🏭 Rondas Digitales — $25.000</a>
     <a href="https://mpago.la/2W985cG" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#009ee3,#007eb5);color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:12px;text-decoration:none">💳 Rondas Digitales MP — $20.000</a>
+    <a href="mailto:alejsanchez736@gmail.com" style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#94a3b8;font-size:14px;font-weight:500;padding:12px 28px;border-radius:12px;text-decoration:none">✉️ Consultar un proyecto a medida</a>
   </div>
 </section>
 
@@ -492,7 +740,7 @@
   <p>
     <strong>DPT · Desarrollos y Procesos Técnicos</strong><br>
     © 2025 · Todos los derechos reservados<br>
-    Consultas: alejsanchez736@gmail.com
+    Consultas: alejsanchez736@gmail.com · +54 9 15 6992-7053
   </p>
 </footer>
 
