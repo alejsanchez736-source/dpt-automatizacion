@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DPT — Guías de Automatización Industrial</title>
+<title>DPT — Desarrollos y Procesos Técnicos</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500&display=swap');
 
@@ -409,41 +409,132 @@
   }
   footer p { font-size: 12px; color: #475569; line-height: 1.8; }
   footer strong { color: #818cf8; }
+
+  /* DPT VISUALS — ilustraciones integradas, sin archivos de imagen */
+  .visual-stage {
+    margin-top: 42px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    position: relative;
+  }
+  @media(max-width:800px){ .visual-stage{grid-template-columns:1fr 1fr;} }
+  @media(max-width:520px){ .visual-stage{grid-template-columns:1fr;} }
+
+  .visual-card {
+    min-height: 138px;
+    border: 1px solid rgba(129,140,248,.24);
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+    padding: 20px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+  .visual-card::after {
+    content:"";
+    position:absolute; width:90px; height:90px; border-radius:50%;
+    right:-35px; top:-35px; background:rgba(6,182,212,.08);
+  }
+  .visual-icon {
+    width:48px; height:48px; border-radius:13px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:25px; margin-bottom:14px;
+    background:rgba(67,56,202,.24); border:1px solid rgba(129,140,248,.3);
+  }
+  .visual-title { color:#fff; font:700 14px 'Space Grotesk',sans-serif; margin-bottom:5px; }
+  .visual-copy { color:#64748b; font-size:11px; line-height:1.45; }
+
+  .project-illustration {
+    height: 150px;
+    display:flex; align-items:center; justify-content:center;
+    background:
+      linear-gradient(rgba(99,102,241,.08) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(99,102,241,.08) 1px,transparent 1px),
+      linear-gradient(145deg,#111827,#1e293b);
+    background-size:24px 24px,24px 24px,auto;
+    border-bottom:1px solid var(--line);
+    position:relative; overflow:hidden;
+  }
+  .project-illustration .big-icon {
+    width:78px; height:78px; border-radius:22px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:40px; color:#fff;
+    background:linear-gradient(135deg,rgba(67,56,202,.9),rgba(8,145,178,.85));
+    box-shadow:0 18px 40px rgba(0,0,0,.25);
+    border:1px solid rgba(255,255,255,.16);
+  }
+  .project-illustration .signal {
+    position:absolute; width:8px; height:8px; border-radius:50%;
+    background:#4ade80; right:18px; top:16px;
+    box-shadow:0 0 0 6px rgba(74,222,128,.12);
+  }
+
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <div class="nav-brand">⚙️ DPT</div>
+  <div class="nav-brand">⚙️ DPT · DESARROLLOS Y PROCESOS TÉCNICOS</div>
   <a href="#productos" class="nav-cta">Ver guías →</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-grid"></div>
-  <div class="hero-badge"><span class="badge-dot"></span>2 guías disponibles · Descarga instantánea</div>
-  <h1>Automatizá tu negocio<br><em>desde hoy mismo</em></h1>
-  <p class="hero-sub">Guías prácticas de automatización con Google Workspace y n8n. Sin saber programar. Con ejemplos reales de industria argentina.</p>
+  <div class="hero-badge"><span class="badge-dot"></span>AUTOMATIZACIÓN · INDUSTRIA · CALIDAD · DIGITALIZACIÓN</div>
+  <h1>DPT<br><em>DESARROLLOS Y PROCESOS TÉCNICOS</em></h1>
+  <p class="hero-sub" style="max-width:760px">
+    Tecnología aplicada a procesos reales. Desarrollamos soluciones simples y concretas para mejorar
+    procesos industriales y de gestión mediante automatización, digitalización, control de procesos,
+    dashboards, trazabilidad y herramientas digitales.
+    <br><br>
+    Integramos tecnologías como ESP32, Google Workspace, n8n y desarrollos web para transformar tareas
+    repetitivas, controles manuales e información dispersa en sistemas prácticos que ayuden a trabajar
+    mejor y tomar decisiones con datos reales.
+  </p>
+
+  <div class="visual-stage">
+    <div class="visual-card"><div class="visual-icon">⚙️</div><div class="visual-title">Automatización</div><div class="visual-copy">Hardware y software trabajando juntos para simplificar tareas.</div></div>
+    <div class="visual-card"><div class="visual-icon">📊</div><div class="visual-title">Control y datos</div><div class="visual-copy">Dashboards, indicadores y datos en tiempo real para decidir mejor.</div></div>
+    <div class="visual-card"><div class="visual-icon">🔗</div><div class="visual-title">Integración</div><div class="visual-copy">ESP32, Google Workspace, n8n y herramientas web conectadas.</div></div>
+    <div class="visual-card"><div class="visual-icon">🏭</div><div class="visual-title">Procesos reales</div><div class="visual-copy">Soluciones pensadas desde la necesidad concreta de planta y gestión.</div></div>
+  </div>
+
+  <div style="max-width:780px;margin:0 auto 34px;position:relative;padding-top:10px">
+    <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#818cf8;font-weight:700;margin-bottom:10px">
+      FORMACIÓN DPT
+    </div>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(26px,4vw,40px);color:#fff;line-height:1.15;margin-bottom:12px">
+      Aprendé a trabajar con la automatización
+    </h2>
+    <p style="color:#94a3b8;font-size:16px;line-height:1.7;max-width:650px;margin:0 auto">
+      No necesitás ser programador para empezar. En nuestras guías compartimos herramientas,
+      métodos y experiencias de proyectos reales para que puedas automatizar tareas, conectar sistemas,
+      crear controles y llevar procesos manuales a entornos digitales.
+      <strong style="color:#c7d2fe">De la idea a un sistema funcionando.</strong>
+    </p>
+  </div>
 
   <div class="hero-catalog">
     <div class="hero-product featured">
       <span class="hp-badge hot">Más vendida</span>
       <div class="hp-title">Primeros Pasos en la Hiper-Automatización</div>
       <div class="hp-desc">Google Workspace + n8n para PyMEs, emprendedores y profesionales</div>
-      <div class="hp-price"><span>$</span>15.000 <span style="font-size:12px;color:#64748b">via Hotmart</span></div>
+      <div class="hp-price"><span>$</span>50.000 <span style="font-size:12px;color:#64748b">ARS</span></div>
       <a href="https://go.hotmart.com/F106515098X" class="hp-btn-hotmart">📘 Comprar con Hotmart</a>
       <div class="hp-separator">o pagá</div>
-      <a href="https://mpago.la/2YSeQhb" class="hp-btn-mp">💳 MercadoPago — $10.000</a>
+      <a href="https://mpago.la/2YSeQhb" class="hp-btn-mp">💳 MercadoPago — $50.000</a>
     </div>
     <div class="hero-product">
       <span class="hp-badge new">Nueva</span>
       <div class="hp-title">Rondas Digitales Industriales</div>
       <div class="hp-desc">Control de procesos en planta con QR + Forms + n8n. Costo cero.</div>
-      <div class="hp-price"><span>$</span>25.000 <span style="font-size:12px;color:#64748b">via Hotmart</span></div>
+      <div class="hp-price"><span>$</span>50.000 <span style="font-size:12px;color:#64748b">ARS</span></div>
       <a href="https://go.hotmart.com/J106533330R" class="hp-btn-hotmart">🏭 Comprar con Hotmart</a>
       <div class="hp-separator">o pagá</div>
-      <a href="https://mpago.la/2W985cG" class="hp-btn-mp">💳 MercadoPago — $20.000</a>
+      <a href="https://mpago.la/2W985cG" class="hp-btn-mp">💳 MercadoPago — $50.000</a>
     </div>
   </div>
 </section>
@@ -461,9 +552,9 @@
 <!-- PRODUCTOS DETALLADOS -->
 <section class="products" id="productos">
   <div class="container">
-    <span class="eyebrow">Catálogo DPT</span>
-    <h2 class="section-title">Dos guías para dos<br>tipos de problema</h2>
-    <p class="section-sub">Una para digitalizar cualquier negocio. Otra para controlar procesos industriales en planta. Las dos con las mismas herramientas gratuitas.</p>
+    <span class="eyebrow">Aprendé con DPT</span>
+    <h2 class="section-title">Guías prácticas basadas<br>en proyectos reales</h2>
+    <p class="section-sub">Material pensado para llevar la automatización a la práctica: desde la digitalización de tareas y negocios hasta el control de procesos industriales en planta.</p>
 
     <div class="product-cards">
       <div class="product-card featured">
@@ -482,12 +573,12 @@
             <li><span class="pc-check">✓</span> Actualizaciones sin costo extra</li>
           </ul>
           <div class="pc-price-row">
-            <div class="pc-price">$15.000</div>
-            <div class="pc-price-label">ARS · Hotmart</div>
+            <div class="pc-price">$50.000</div>
+            <div class="pc-price-label">ARS</div>
           </div>
           <a href="https://go.hotmart.com/F106515098X" class="pc-btn-hotmart">📘 Comprar con Hotmart</a>
           <div class="pc-sep">o si preferís</div>
-          <a href="https://mpago.la/2YSeQhb" class="pc-btn-mp">💳 MercadoPago — $10.000</a>
+          <a href="https://mpago.la/2YSeQhb" class="pc-btn-mp">💳 MercadoPago — $50.000</a>
         </div>
       </div>
 
@@ -507,12 +598,12 @@
             <li><span class="pc-check">✓</span> Actualizaciones sin costo extra</li>
           </ul>
           <div class="pc-price-row">
-            <div class="pc-price">$25.000</div>
-            <div class="pc-price-label">ARS · Hotmart</div>
+            <div class="pc-price">$50.000</div>
+            <div class="pc-price-label">ARS</div>
           </div>
           <a href="https://go.hotmart.com/J106533330R" class="pc-btn-hotmart">🏭 Comprar con Hotmart</a>
           <div class="pc-sep">o si preferís</div>
-          <a href="https://mpago.la/2W985cG" class="pc-btn-mp">💳 MercadoPago — $20.000</a>
+          <a href="https://mpago.la/2W985cG" class="pc-btn-mp">💳 MercadoPago — $50.000</a>
         </div>
       </div>
     </div>
@@ -536,6 +627,7 @@
           <div class="project-subtitle">12 máquinas · En vivo 24/7</div>
         </div>
 
+        <div class="project-illustration"><span class="signal"></span><div class="big-icon">📈</div></div>
         <div class="project-body">
           <p class="project-desc">Panel de control que muestra en tiempo real el estado de todas las extrusoras de la planta: produciendo, próximas a finalizar o detenidas. Cada tarjeta de máquina incluye el código de producción activo, metros restantes, próximos trabajos y fecha estimada de entrega. Se actualiza automáticamente desde Google Sheets.</p>
           <div class="project-stack">
@@ -555,7 +647,7 @@
           <div class="project-title">Sistema de Solicitudes de Mantenimiento</div>
           <div class="project-subtitle">Alerta multicanal · Trazabilidad completa</div>
         </div>
-        <img src="Panel%20de%20solicitudes%20de%20mantenimiento%20.jpg" alt="Dashboard de mantenimiento" class="project-img">
+<div class="project-illustration"><span class="signal"></span><div class="big-icon">🔧</div></div>
         <div class="project-body">
           <p class="project-desc">Cuando cualquier operario detecta una falla, genera una solicitud desde su celular, una tablet o un botón físico en la máquina. El sistema dispara automáticamente un mail al sector de mantenimiento y activa una alerta visual en el dashboard central — con colores de urgencia y tiempo transcurrido sin atención. Todo queda registrado con fecha, hora, máquina y motivo para análisis posterior.</p>
           <div class="project-stack">
@@ -575,7 +667,7 @@
           <div class="project-title">Medición por Cámara — Control Dimensional</div>
           <div class="project-subtitle">Reemplaza software comercial · Envío a Google Sheets</div>
         </div>
-        <img src="aplicacion%20digital%20%20%2B%20interfaz%20automatica%20con%20googlesheets%20.jpg" alt="Medición por cámara" class="project-img">
+<div class="project-illustration"><span class="signal"></span><div class="big-icon">📷</div></div>
         <div class="project-body">
           <p class="project-desc">Aplicación web de medición dimensional por cámara para control de calidad de cables y probetas. Permite calibrar el aumento, medir espesores con líneas y diámetros con 4 puntos para compensar la ovalación. Cada ensayo con sus mediciones se envía automáticamente a Google Sheets para trazabilidad. Desarrollado a medida para reemplazar software comercial.</p>
           <div class="project-stack">
@@ -595,6 +687,7 @@
           <div class="project-title">Generación de Dashboards y Herramientas Digitales</div>
           <div class="project-subtitle">Para industria, calidad y gestión</div>
         </div>
+        <div class="project-illustration"><span class="signal"></span><div class="big-icon">🖥️</div></div>
         <div class="project-body">
           <p class="project-desc">Diseño y desarrollo de dashboards operativos personalizados para plantas industriales y equipos de gestión: KPIs de producción, reportes de no conformidades, seguimiento de OTs, control de calidad y más. Construidos sobre Google Workspace + n8n + Netlify, sin licencias costosas y con datos en tiempo real.</p>
           <div class="project-stack">
@@ -730,54 +823,15 @@
   </div>
 </section>
 
-<!-- GALERÍA -->
-<section style="background:var(--node-bg);padding:72px 24px;">
-  <div class="container">
-    <span class="eyebrow" style="color:#818cf8">Proyectos en producción</span>
-    <h2 class="section-title" style="color:#fff;margin-bottom:12px">Así se ven los sistemas<br>funcionando en planta</h2>
-    <p style="color:#64748b;font-size:15px;margin-bottom:40px">Capturas reales. Sin filtros. Sin demos.</p>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
-
-      <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.08);">
-        <img src="extrusión-del-panel.jpg" alt="Dashboard status extrusoras" style="width:100%;height:200px;object-fit:cover;display:block;">
-        <div style="padding:14px 16px;background:rgba(255,255,255,.04);">
-          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;color:#818cf8;text-transform:uppercase;margin-bottom:4px">Monitoreo en tiempo real</div>
-          <div style="font-size:14px;font-weight:600;color:#fff">Dashboard Status de Extrusoras</div>
-          <div style="font-size:12px;color:#475569;margin-top:2px">12 máquinas · Estado en vivo · Google Sheets</div>
-        </div>
-      </div>
-
-      <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.08);">
-        <img src="tablero-mantenimiento.jpg" alt="Dashboard solicitudes de mantenimiento" style="width:100%;height:200px;object-fit:cover;display:block;">
-        <div style="padding:14px 16px;background:rgba(255,255,255,.04);">
-          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;color:#f87171;text-transform:uppercase;margin-bottom:4px">Mantenimiento industrial</div>
-          <div style="font-size:14px;font-weight:600;color:#fff">Sistema de Solicitudes de Mantenimiento</div>
-          <div style="font-size:12px;color:#475569;margin-top:2px">Alerta por mail + dashboard · Tiempo sin atención</div>
-        </div>
-      </div>
-
-      <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.08);">
-        <img src="medicación-cámara.jpg" alt="Aplicación medición por cámara" style="width:100%;height:200px;object-fit:cover;display:block;">
-        <div style="padding:14px 16px;background:rgba(255,255,255,.04);">
-          <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;color:#34d399;text-transform:uppercase;margin-bottom:4px">Control de calidad</div>
-          <div style="font-size:14px;font-weight:600;color:#fff">Medición Dimensional por Cámara</div>
-          <div style="font-size:12px;color:#475569;margin-top:2px">WebRTC · Canvas · Envío automático a Google Sheets</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <!-- FOOTER CTA -->
 <section style="background:var(--node-bg);padding:64px 24px;text-align:center">
-  <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,4vw,36px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:16px">¿Seguís haciendo todo a mano?</h2>
-  <p style="color:#64748b;font-size:16px;margin-bottom:36px">La automatización no reemplaza personas. Las libera para hacer lo que solo ellas pueden hacer.</p>
+  <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(24px,4vw,36px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:16px">Convertí una necesidad en una solución</h2>
+  <p style="color:#64748b;font-size:16px;margin-bottom:36px">DPT desarrolla herramientas y comparte conocimiento para simplificar procesos, mejorar controles y transformar datos en información útil.</p>
   <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
-    <a href="https://go.hotmart.com/F106515098X" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#4338ca,#6d28d9);color:#fff;font-size:15px;font-weight:700;padding:14px 32px;border-radius:12px;text-decoration:none">📘 Hiper-Automatización — $15.000</a>
-    <a href="https://go.hotmart.com/J106533330R" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#064E3B,#059669);color:#fff;font-size:15px;font-weight:700;padding:14px 32px;border-radius:12px;text-decoration:none">🏭 Rondas Digitales — $25.000</a>
-    <a href="https://mpago.la/2W985cG" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#009ee3,#007eb5);color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:12px;text-decoration:none">💳 Rondas Digitales MP — $20.000</a>
+    <a href="https://go.hotmart.com/F106515098X" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#4338ca,#6d28d9);color:#fff;font-size:15px;font-weight:700;padding:14px 32px;border-radius:12px;text-decoration:none">📘 Hiper-Automatización — $50.000</a>
+    <a href="https://go.hotmart.com/J106533330R" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#064E3B,#059669);color:#fff;font-size:15px;font-weight:700;padding:14px 32px;border-radius:12px;text-decoration:none">🏭 Rondas Digitales — $50.000</a>
+    <a href="https://mpago.la/2W985cG" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#009ee3,#007eb5);color:#fff;font-size:14px;font-weight:600;padding:12px 28px;border-radius:12px;text-decoration:none">💳 Rondas Digitales MP — $50.000</a>
     <a href="mailto:alejsanchez736@gmail.com" style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#94a3b8;font-size:14px;font-weight:500;padding:12px 28px;border-radius:12px;text-decoration:none">✉️ Consultar un proyecto a medida</a>
   </div>
 </section>
