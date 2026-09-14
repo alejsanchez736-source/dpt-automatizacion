@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DPT Turnero — Gestión de Turnos para Centros de Salud</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:    #0f1117;
+    --ink2:   #3d4050;
+    --muted:  #7a7d8c;
+    --page:   #f5f4f0;
+    --white:  #ffffff;
+    --accent: #4338ca;
+    --accent2:#6d28d9;
+    --cyan:   #0891b2;
+    --green:  #059669;
+    --warn:   #d97706;
+    --red:    #dc2626;
+    --line:   #e4e2dc;
+    --node-bg:#1a1d2e;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--page);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  [hidden] { display: none !important; }
+
+  a { color: inherit; }
+
+  /* ---------- TOPBAR (panel/config) ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--node-bg);
+    padding: 12px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; flex-wrap: wrap;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .topbar-brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 14px; color: #c7d2fe;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .topbar-brand small { color: #64748b; font-weight: 400; font-size: 11px; }
+  .topbar-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    border: none; border-radius: 9px; cursor: pointer;
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px;
+    padding: 9px 16px; text-decoration: none;
+    transition: transform .12s, box-shadow .12s, background .15s;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: linear-gradient(135deg,#4338ca,#6d28d9); color:#fff; }
+  .btn-primary:hover { box-shadow: 0 6px 18px rgba(67,56,202,.35); }
+  .btn-ghost { background: rgba(255,255,255,.08); color:#cbd5e1; border:1px solid rgba(255,255,255,.14); }
+  .btn-ghost:hover { background: rgba(255,255,255,.14); }
+  .btn-light { background: var(--white); color: var(--ink); border:1px solid var(--line); }
+  .btn-light:hover { background:#faf9f6; }
+  .btn-danger { background: rgba(220,38,38,.12); color:#dc2626; border:1px solid rgba(220,38,38,.3); }
+  .btn-danger:hover { background: rgba(220,38,38,.2); }
+  .btn-sm { padding: 6px 11px; font-size: 12px; border-radius: 7px; }
+  .btn-block { width: 100%; }
+
+  /* ---------- HOME / SELECTOR ---------- */
+  .home-hero {
+    background: var(--node-bg);
+    padding: 64px 20px 56px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .home-hero::before {
+    content:""; position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(99,102,241,.10) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99,102,241,.10) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+  .home-badge {
+    position: relative;
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(99,102,241,.18);
+    border: 1px solid rgba(99,102,241,.35);
+    color: #a5b4fc; font-size: 11px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 20px;
+    margin-bottom: 22px;
+  }
+  .badge-dot { width:6px; height:6px; border-radius:50%; background:#4ade80; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+  .home-hero h1 {
+    position: relative;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 700; color: #fff;
+    line-height: 1.15; letter-spacing: -1px;
+    max-width: 680px; margin: 0 auto 14px;
+  }
+  .home-hero h1 em {
+    font-style: normal;
+    background: linear-gradient(90deg,#818cf8,#06b6d4);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .home-hero p {
+    position: relative;
+    color: #94a3b8; font-size: 15.5px; max-width: 520px;
+    margin: 0 auto 40px; line-height: 1.65;
+  }
+
+  .home-cards {
+    position: relative;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    max-width: 760px; margin: 0 auto;
+  }
+  @media(max-width:640px){ .home-cards{ grid-template-columns:1fr; } }
+
+  .home-card {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 16px; padding: 28px 24px;
+    text-align: left; text-decoration: none;
+    display: block; transition: border-color .2s, transform .2s;
+  }
+  .home-card:hover { border-color: rgba(129,140,248,.5); transform: translateY(-2px); }
+  .home-card .hc-icon {
+    width: 46px; height: 46px; border-radius: 12px;
+    display:flex; align-items:center; justify-content:center; font-size:22px;
+    background: rgba(67,56,202,.24); border:1px solid rgba(129,140,248,.3);
+    margin-bottom: 16px;
+  }
+  .home-card .hc-title { font-family:'Space Grotesk',sans-serif; font-size:17px; font-weight:700; color:#fff; margin-bottom:6px; }
+  .home-card .hc-desc { font-size: 12.5px; color:#94a3b8; line-height:1.6; margin-bottom: 14px; }
+  .home-card .hc-cta { font-size:12px; font-weight:700; color:#a5b4fc; letter-spacing:.4px; }
+
+  footer.dpt-footer {
+    background: var(--node-bg); padding: 26px 20px;
+    text-align: center; border-top: 1px solid rgba(255,255,255,.06);
+  }
+  footer.dpt-footer p { font-size: 11.5px; color: #475569; line-height:1.8; }
+  footer.dpt-footer strong { color: #818cf8; }
+
+  /* ---------- PANEL ---------- */
+  .panel-wrap { max-width: 1080px; margin: 0 auto; padding: 24px 18px 60px; }
+
+  .tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom: 20px; }
+  .tab-btn {
+    background: var(--white); border:1px solid var(--line); color: var(--ink2);
+    padding: 9px 16px; border-radius: 9px; font-size: 13px; font-weight:600;
+    cursor: pointer;
+  }
+  .tab-btn.active { background: var(--accent); border-color: var(--accent); color:#fff; }
+
+  .grid-2 { display:grid; grid-template-columns: 1.1fr 1fr; gap: 22px; align-items:start; }
+  @media(max-width:820px){ .grid-2 { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--white); border:1px solid var(--line); border-radius: 16px;
+    padding: 20px; margin-bottom: 20px;
+  }
+  .card h2 {
+    font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:700;
+    color: var(--ink); margin-bottom: 4px;
+  }
+  .card .card-sub { font-size:12.5px; color: var(--muted); margin-bottom:16px; }
+
+  .add-form { display:flex; gap:8px; flex-wrap:wrap; }
+  .add-form input {
+    flex: 1 1 180px;
+    font-family:'Inter',sans-serif; font-size: 14px;
+    padding: 10px 12px; border:1px solid var(--line); border-radius: 9px;
+    background: var(--page); color: var(--ink);
+  }
+  .add-form input:focus { outline:2px solid rgba(67,56,202,.35); }
+
+  .current-call-box {
+    background: linear-gradient(135deg,#1a1f6e,#4338ca);
+    border-radius: 14px; padding: 22px; color:#fff; margin-bottom: 18px;
+    position: relative; overflow:hidden;
+  }
+  .current-call-box .ccb-label { font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:#c7d2fe; margin-bottom:8px; font-weight:700; }
+  .current-call-box .ccb-name { font-family:'Space Grotesk',sans-serif; font-size: 26px; font-weight:700; line-height:1.2; margin-bottom:4px; }
+  .current-call-box .ccb-meta { font-size: 12.5px; color:#a5b4fc; }
+  .current-call-box .ccb-empty { font-size: 14px; color:#c7d2fe; }
+  .ccb-actions { display:flex; gap:8px; margin-top: 16px; }
+
+  .queue-list { list-style:none; }
+  .queue-item {
+    display:flex; align-items:center; gap:12px;
+    padding: 12px 10px; border-bottom:1px solid var(--line);
+  }
+  .queue-item:last-child { border-bottom:none; }
+  .queue-num {
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px;
+    color: var(--accent); background: rgba(67,56,202,.08);
+    border-radius:8px; padding: 4px 9px; min-width: 46px; text-align:center;
+  }
+  .queue-name-btn {
+    flex:1; text-align:left; background:none; border:none; cursor:pointer;
+    font-family:'Inter',sans-serif; font-size: 14.5px; font-weight:600; color: var(--ink);
+    padding: 4px 0;
+  }
+  .queue-name-btn:hover { color: var(--accent); }
+  .queue-item-actions { display:flex; gap:6px; }
+
+  .empty-note { font-size: 13px; color: var(--muted); padding: 14px 4px; }
+
+  .history-list { list-style:none; max-height: 260px; overflow-y:auto; }
+  .history-item {
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding: 9px 4px; border-bottom:1px solid var(--line); font-size: 13px;
+  }
+  .history-item:last-child { border-bottom:none; }
+  .history-item .hi-name { color: var(--ink2); }
+  .status-pill { font-size:10.5px; font-weight:700; padding:2px 9px; border-radius:20px; text-transform:uppercase; letter-spacing:.4px; }
+  .status-pill.atendido { background: rgba(5,150,105,.12); color: var(--green); }
+  .status-pill.ausente { background: rgba(220,38,38,.1); color: var(--red); }
+  .status-pill.llamado { background: rgba(217,119,6,.12); color: var(--warn); }
+
+  .settings-grid { display:flex; flex-direction:column; gap:14px; }
+  .consultorio-row { display:flex; gap:8px; align-items:center; }
+  .consultorio-row input { flex:1; font-size:13.5px; padding:8px 10px; border:1px solid var(--line); border-radius:8px; background:var(--page); }
+  .voice-toggle { display:flex; align-items:center; gap:8px; font-size:13px; color: var(--ink2); }
+
+  /* ---------- PANTALLA PUBLICA ---------- */
+  .screen-body { background: var(--node-bg); min-height:100vh; color:#fff; padding: 28px 28px 40px; }
+  .screen-top { display:flex; align-items:center; justify-content:space-between; margin-bottom: 24px; flex-wrap:wrap; gap:12px; }
+  .screen-brand { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px; color:#c7d2fe; display:flex; align-items:center; gap:10px; }
+  .screen-clock { font-family:'Space Grotesk',sans-serif; font-size: 22px; color:#94a3b8; }
+  .screen-date { font-size: 12px; color:#64748b; text-transform:capitalize; }
+
+  .consultorios-grid {
+    display:grid; gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+
+  .consultorio-block {
+    background: rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius: 20px; padding: 26px;
+    transition: box-shadow .3s, border-color .3s;
+  }
+  .consultorio-block.flash {
+    border-color: rgba(74,222,128,.8);
+    box-shadow: 0 0 0 4px rgba(74,222,128,.18), 0 0 40px rgba(74,222,128,.25);
+  }
+  .cb-title { font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:#818cf8; font-weight:700; margin-bottom:14px; }
+  .cb-current-label { font-size:11px; color:#64748b; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; }
+  .cb-current-num { font-family:'Space Grotesk',sans-serif; font-size:15px; color:#a5b4fc; font-weight:700; margin-bottom:2px; }
+  .cb-current-name { font-family:'Space Grotesk',sans-serif; font-size: clamp(26px,4vw,40px); font-weight:700; color:#fff; line-height:1.15; margin-bottom: 18px; min-height: 1.15em; }
+  .cb-current-name.empty { color:#475569; font-size: 18px; }
+  .cb-next-title { font-size:10.5px; letter-spacing:1.2px; text-transform:uppercase; color:#64748b; margin-bottom:8px; font-weight:700; }
+  .cb-next-list { list-style:none; display:flex; flex-direction:column; gap:6px; }
+  .cb-next-list li { font-size: 13.5px; color:#94a3b8; display:flex; gap:8px; }
+  .cb-next-list .n { color:#4338ca; background:rgba(99,102,241,.18); border-radius:6px; padding:1px 7px; font-weight:700; font-size:11.5px; }
+  .cb-next-empty { font-size:12.5px; color:#475569; }
+
+  .unlock-overlay {
+    position:fixed; inset:0; background:rgba(15,17,23,.94);
+    display:flex; align-items:center; justify-content:center; z-index:200;
+    flex-direction:column; gap:18px; text-align:center; padding:20px;
+  }
+  .unlock-overlay h2 { font-family:'Space Grotesk',sans-serif; color:#fff; font-size:22px; }
+  .unlock-overlay p { color:#94a3b8; font-size:14px; max-width:360px; }
+
+  .toast {
+    position: fixed; bottom: 20px; left:50%; transform: translateX(-50%);
+    background: var(--ink); color:#fff; padding: 10px 18px; border-radius: 10px;
+    font-size: 13px; z-index: 300; opacity:0; pointer-events:none;
+    transition: opacity .25s, transform .25s;
+  }
+  .toast.show { opacity:1; transform: translateX(-50%) translateY(-4px); }
+
+  @media(max-width:600px){
+    .add-form { flex-direction:column; }
+    .add-form input { flex: 1 1 auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HOME ================= -->
+<div id="view-home">
+  <div class="home-hero">
+    <div class="home-badge"><span class="badge-dot"></span>DPT · SALUD · GESTIÓN DE TURNOS</div>
+    <h1>Turnero Digital para<br><em>Centros de Salud</em></h1>
+    <p>Ordená la fila de pacientes, llamá el próximo turno con un clic y avisá automáticamente en la pantalla de la sala de espera — con sonido y anuncio de voz.</p>
+    <div class="home-cards">
+      <a class="home-card" href="#/panel">
+        <div class="hc-icon">🩺</div>
+        <div class="hc-title">Panel del Profesional</div>
+        <div class="hc-desc">Cargá pacientes, gestioná la cola por consultorio y llamá el siguiente turno tocando el nombre.</div>
+        <div class="hc-cta">ABRIR PANEL →</div>
+      </a>
+      <a class="home-card" href="#/pantalla" target="_blank" rel="noopener">
+        <div class="hc-icon">📺</div>
+        <div class="hc-title">Pantalla de Sala de Espera</div>
+        <div class="hc-desc">Pantalla pública para el TV o monitor de la sala: muestra el turno actual con sonido y voz.</div>
+        <div class="hc-cta">ABRIR PANTALLA →</div>
+      </a>
+    </div>
+  </div>
+  <footer class="dpt-footer">
+    <p>
+      <strong>DPT · Desarrollos y Procesos Técnicos</strong><br>
+      Sistema de Turnos para Centros de Salud · Funciona 100% en el navegador, sin instalación<br>
+      Consultas: alejsanchez736@gmail.com
+    </p>
+  </footer>
+</div>
+
+<!-- ================= PANEL ================= -->
+<div id="view-panel" hidden>
+  <div class="topbar">
+    <div class="topbar-brand">🩺 DPT TURNERO <small id="panel-clinic-name">· Panel del Profesional</small></div>
+    <div class="topbar-actions">
+      <button class="btn btn-ghost btn-sm" id="btn-toggle-settings">⚙️ Configuración</button>
+      <a class="btn btn-ghost btn-sm" href="#/pantalla" target="_blank" rel="noopener">📺 Abrir pantalla</a>
+      <a class="btn btn-ghost btn-sm" href="#/">🏠 Inicio</a>
+    </div>
+  </div>
+
+  <div class="panel-wrap">
+
+    <div class="card" id="settings-card" hidden>
+      <h2>Configuración</h2>
+      <div class="card-sub">Nombre del centro y consultorios / profesionales activos.</div>
+      <div class="settings-grid">
+        <div>
+          <label style="font-size:12px;font-weight:600;color:var(--ink2);display:block;margin-bottom:6px">Nombre del centro de salud</label>
+          <input type="text" id="input-clinic-name" placeholder="Ej: Centro de Salud San Martín" style="width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--page);font-size:14px">
+        </div>
+        <div>
+          <label style="font-size:12px;font-weight:600;color:var(--ink2);display:block;margin-bottom:6px">Consultorios / profesionales</label>
+          <div id="consultorios-editor"></div>
+          <div class="consultorio-row" style="margin-top:8px">
+            <input type="text" id="input-new-consultorio" placeholder="Ej: Consultorio 2 - Dra. Gómez">
+            <button class="btn btn-primary btn-sm" id="btn-add-consultorio">Agregar</button>
+          </div>
+        </div>
+        <div class="voice-toggle">
+          <input type="checkbox" id="input-voice-enabled" checked>
+          <label for="input-voice-enabled">Anunciar por voz al llamar un turno</label>
+        </div>
+        <div>
+          <button class="btn btn-danger btn-sm" id="btn-new-day">🔄 Iniciar nuevo día (borra la cola actual)</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs" id="consultorio-tabs"></div>
+
+    <div class="grid-2">
+      <div>
+        <div class="card">
+          <h2>Turno actual</h2>
+          <div class="card-sub">El turno en atención en este consultorio.</div>
+          <div class="current-call-box" id="current-call-box">
+            <div class="ccb-empty">Todavía no se llamó ningún turno.</div>
+          </div>
+          <button class="btn btn-primary btn-block" id="btn-call-next">▶️ Llamar siguiente turno</button>
+        </div>
+
+        <div class="card">
+          <h2>Agregar paciente</h2>
+          <div class="card-sub">Se suma al final de la cola de este consultorio.</div>
+          <form class="add-form" id="form-add-patient">
+            <input type="text" id="input-patient-name" placeholder="Nombre del paciente" required autocomplete="off">
+            <button class="btn btn-primary" type="submit">+ Agregar a la cola</button>
+          </form>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h2>Cola de espera</h2>
+          <div class="card-sub">Tocá el nombre para llamar ese turno (fuera de orden si hace falta).</div>
+          <ul class="queue-list" id="queue-list"></ul>
+        </div>
+
+        <div class="card">
+          <h2>Historial de hoy</h2>
+          <div class="card-sub">Turnos ya llamados, atendidos o ausentes.</div>
+          <ul class="history-list" id="history-list"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PANTALLA PUBLICA ================= -->
+<div id="view-pantalla" hidden>
+  <div class="unlock-overlay" id="unlock-overlay">
+    <h2>📺 Pantalla de Sala de Espera</h2>
+    <p>Tocá el botón para activar el sonido y la voz de los anuncios. Después dejá esta pantalla abierta en el monitor o TV de la sala de espera.</p>
+    <button class="btn btn-primary" id="btn-unlock-sound">🔊 Activar sonido y comenzar</button>
+  </div>
+  <div class="screen-body">
+    <div class="screen-top">
+      <div class="screen-brand">🩺 <span id="screen-clinic-name">DPT Turnero</span></div>
+      <div style="text-align:right">
+        <div class="screen-clock" id="screen-clock">--:--</div>
+        <div class="screen-date" id="screen-date"></div>
+      </div>
+    </div>
+    <div class="consultorios-grid" id="consultorios-grid"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var CONFIG_KEY = "dpt_turnero_config_v1";
+  var STATE_KEY  = "dpt_turnero_state_v1";
+
+  function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+
+  function defaultConfig(){
+    return {
+      clinicName: "Centro de Salud",
+      consultorios: [{ id: uid(), name: "Consultorio 1" }],
+      voiceEnabled: true
+    };
+  }
+  function defaultState(){ return { turns: {}, currentCall: {}, counters: {} }; }
+  // turns: { consultorioId: [ {id, number, name, status, createdAt, calledAt} ] }
+
+  function loadConfig(){
+    try {
+      var raw = localStorage.getItem(CONFIG_KEY);
+      if (!raw) return defaultConfig();
+      var c = JSON.parse(raw);
+      if (!c.consultorios || !c.consultorios.length) c.consultorios = defaultConfig().consultorios;
+      if (typeof c.voiceEnabled !== "boolean") c.voiceEnabled = true;
+      return c;
+    } catch(e){ return defaultConfig(); }
+  }
+  function saveConfig(c){ localStorage.setItem(CONFIG_KEY, JSON.stringify(c)); }
+
+  function loadState(){
+    try {
+      var raw = localStorage.getItem(STATE_KEY);
+      if (!raw) return defaultState();
+      var s = JSON.parse(raw);
+      s.turns = s.turns || {};
+      s.currentCall = s.currentCall || {};
+      s.counters = s.counters || {};
+      return s;
+    } catch(e){ return defaultState(); }
+  }
+  function saveState(s){ localStorage.setItem(STATE_KEY, JSON.stringify(s)); }
+
+  function ensureConsultorioBuckets(state, config){
+    config.consultorios.forEach(function(c){
+      if (!state.turns[c.id]) state.turns[c.id] = [];
+      if (state.counters[c.id] == null) state.counters[c.id] = 0;
+    });
+  }
+
+  var config = loadConfig();
+  saveConfig(config);
+  var state = loadState();
+  ensureConsultorioBuckets(state, config);
+  saveState(state);
+
+  var activeConsultorioId = config.consultorios[0] ? config.consultorios[0].id : null;
+
+  /* ---------------- routing ---------------- */
+  var viewHome = document.getElementById("view-home");
+  var viewPanel = document.getElementById("view-panel");
+  var viewPantalla = document.getElementById("view-pantalla");
+
+  function route(){
+    var hash = location.hash || "#/";
+    viewHome.hidden = true; viewPanel.hidden = true; viewPantalla.hidden = true;
+    if (hash.indexOf("#/panel") === 0){
+      viewPanel.hidden = false;
+      renderPanel();
+    } else if (hash.indexOf("#/pantalla") === 0){
+      viewPantalla.hidden = false;
+      initPantalla();
+    } else {
+      viewHome.hidden = false;
+    }
+  }
+  window.addEventListener("hashchange", route);
+
+  /* ---------------- toast ---------------- */
+  var toastEl = document.getElementById("toast");
+  var toastTimer = null;
+  function showToast(msg){
+    toastEl.textContent = msg;
+    toastEl.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toastEl.classList.remove("show"); }, 2200);
+  }
+
+  /* ---------------- audio: beep chime ---------------- */
+  var audioCtx = null;
+  function getAudioCtx(){
+    if (!audioCtx){
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if (Ctx) audioCtx = new Ctx();
+    }
+    return audioCtx;
+  }
+  function playChime(){
+    var ctx = getAudioCtx();
+    if (!ctx) return;
+    var now = ctx.currentTime;
+    [880, 660].forEach(function(freq, i){
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0, now + i*0.28);
+      gain.gain.linearRampToValueAtTime(0.28, now + i*0.28 + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + i*0.28 + 0.32);
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.start(now + i*0.28);
+      osc.stop(now + i*0.28 + 0.34);
+    });
+  }
+  function speak(text){
+    if (!config.voiceEnabled) return;
+    if (!("speechSynthesis" in window)) return;
+    try {
+      window.speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = "es-ES";
+      var voices = window.speechSynthesis.getVoices();
+      var esVoice = voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf("es") === 0; });
+      if (esVoice) u.voice = esVoice;
+      u.rate = 0.95;
+      window.speechSynthesis.speak(u);
+    } catch(e){}
+  }
+  function announceCall(turn, consultorioName){
+    playChime();
+    setTimeout(function(){
+      speak("Turno " + turn.number + ". " + turn.name + ". Por favor dirigirse a " + consultorioName + ".");
+    }, 550);
+  }
+
+  /* ================= PANEL ================= */
+  var elClinicNameTag = document.getElementById("panel-clinic-name");
+  var elSettingsCard = document.getElementById("settings-card");
+  var elTabs = document.getElementById("consultorio-tabs");
+  var elCurrentCallBox = document.getElementById("current-call-box");
+  var elQueueList = document.getElementById("queue-list");
+  var elHistoryList = document.getElementById("history-list");
+  var elFormAdd = document.getElementById("form-add-patient");
+  var elInputName = document.getElementById("input-patient-name");
+  var elBtnCallNext = document.getElementById("btn-call-next");
+
+  document.getElementById("btn-toggle-settings").addEventListener("click", function(){
+    elSettingsCard.hidden = !elSettingsCard.hidden;
+    if (!elSettingsCard.hidden) renderSettings();
+  });
+
+  document.getElementById("input-clinic-name").addEventListener("input", function(e){
+    config.clinicName = e.target.value;
+    saveConfig(config);
+    renderPanel();
+  });
+  document.getElementById("input-voice-enabled").addEventListener("change", function(e){
+    config.voiceEnabled = e.target.checked;
+    saveConfig(config);
+  });
+  document.getElementById("btn-add-consultorio").addEventListener("click", function(){
+    var input = document.getElementById("input-new-consultorio");
+    var name = input.value.trim();
+    if (!name) return;
+    var c = { id: uid(), name: name };
+    config.consultorios.push(c);
+    ensureConsultorioBuckets(state, config);
+    saveConfig(config); saveState(state);
+    input.value = "";
+    activeConsultorioId = c.id;
+    renderSettings(); renderPanel();
+  });
+  document.getElementById("btn-new-day").addEventListener("click", function(){
+    if (!confirm("¿Iniciar un nuevo día? Se va a borrar la cola y el historial de todos los consultorios.")) return;
+    state = defaultState();
+    ensureConsultorioBuckets(state, config);
+    saveState(state);
+    renderPanel();
+    showToast("Nuevo día iniciado");
+  });
+
+  function renderSettings(){
+    document.getElementById("input-clinic-name").value = config.clinicName;
+    document.getElementById("input-voice-enabled").checked = config.voiceEnabled;
+    var host = document.getElementById("consultorios-editor");
+    host.innerHTML = "";
+    config.consultorios.forEach(function(c){
+      var row = document.createElement("div");
+      row.className = "consultorio-row";
+      var input = document.createElement("input");
+      input.type = "text"; input.value = c.name;
+      input.addEventListener("input", function(e){
+        c.name = e.target.value;
+        saveConfig(config);
+        renderPanel();
+      });
+      var del = document.createElement("button");
+      del.className = "btn btn-danger btn-sm";
+      del.textContent = "Quitar";
+      del.addEventListener("click", function(){
+        if (config.consultorios.length <= 1){ showToast("Debe quedar al menos un consultorio"); return; }
+        if (!confirm("¿Quitar \"" + c.name + "\" y su cola?")) return;
+        config.consultorios = config.consultorios.filter(function(x){ return x.id !== c.id; });
+        delete state.turns[c.id]; delete state.counters[c.id]; delete state.currentCall[c.id];
+        saveConfig(config); saveState(state);
+        if (activeConsultorioId === c.id) activeConsultorioId = config.consultorios[0].id;
+        renderSettings(); renderPanel();
+      });
+      row.appendChild(input); row.appendChild(del);
+      host.appendChild(row);
+    });
+  }
+
+  function renderTabs(){
+    elTabs.innerHTML = "";
+    config.consultorios.forEach(function(c){
+      var b = document.createElement("button");
+      b.className = "tab-btn" + (c.id === activeConsultorioId ? " active" : "");
+      b.textContent = c.name;
+      b.addEventListener("click", function(){ activeConsultorioId = c.id; renderPanel(); });
+      elTabs.appendChild(b);
+    });
+  }
+
+  function getConsultorio(id){
+    return config.consultorios.find(function(c){ return c.id === id; });
+  }
+
+  function callTurn(consultorioId, turn){
+    // mark previous current call (if any, still waiting/called) as attended
+    var prev = state.currentCall[consultorioId];
+    if (prev){
+      var prevTurn = (state.turns[consultorioId] || []).find(function(t){ return t.id === prev.turnId; });
+      if (prevTurn && prevTurn.status === "llamado") prevTurn.status = "atendido";
+    }
+    turn.status = "llamado";
+    turn.calledAt = Date.now();
+    state.currentCall[consultorioId] = { turnId: turn.id, name: turn.name, number: turn.number, calledAt: turn.calledAt };
+    saveState(state);
+    var consultorio = getConsultorio(consultorioId);
+    announceCall(turn, consultorio ? consultorio.name : "");
+    renderPanel();
+  }
+
+  elFormAdd.addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = elInputName.value.trim();
+    if (!name || !activeConsultorioId) return;
+    state.counters[activeConsultorioId] = (state.counters[activeConsultorioId] || 0) + 1;
+    var turn = {
+      id: uid(),
+      number: state.counters[activeConsultorioId],
+      name: name,
+      status: "esperando",
+      createdAt: Date.now(),
+      calledAt: null
+    };
+    state.turns[activeConsultorioId].push(turn);
+    saveState(state);
+    elInputName.value = "";
+    renderPanel();
+    showToast("Paciente agregado a la cola");
+  });
+
+  elBtnCallNext.addEventListener("click", function(){
+    if (!activeConsultorioId) return;
+    var waiting = (state.turns[activeConsultorioId] || []).filter(function(t){ return t.status === "esperando"; });
+    if (!waiting.length){ showToast("No hay turnos en espera"); return; }
+    waiting.sort(function(a,b){ return a.number - b.number; });
+    callTurn(activeConsultorioId, waiting[0]);
+  });
+
+  function renderPanel(){
+    if (!config.consultorios.length) return;
+    if (!activeConsultorioId || !getConsultorio(activeConsultorioId)) activeConsultorioId = config.consultorios[0].id;
+    elClinicNameTag.textContent = "· " + config.clinicName;
+    renderTabs();
+
+    var turns = state.turns[activeConsultorioId] || [];
+    var current = state.currentCall[activeConsultorioId];
+
+    // current call box
+    if (current){
+      var mins = Math.max(0, Math.round((Date.now() - current.calledAt) / 60000));
+      elCurrentCallBox.innerHTML =
+        '<div class="ccb-label">Turno en atención</div>' +
+        '<div class="ccb-name">Nº ' + current.number + ' — ' + escapeHtml(current.name) + '</div>' +
+        '<div class="ccb-meta">Llamado hace ' + mins + ' min</div>' +
+        '<div class="ccb-actions">' +
+          '<button class="btn btn-ghost btn-sm" id="btn-recall" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)">🔁 Repetir llamado</button>' +
+          '<button class="btn btn-ghost btn-sm" id="btn-mark-attended" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)">✅ Marcar atendido</button>' +
+        '</div>';
+      document.getElementById("btn-recall").addEventListener("click", function(){
+        var t = turns.find(function(x){ return x.id === current.turnId; });
+        if (!t) return;
+        t.calledAt = Date.now();
+        state.currentCall[activeConsultorioId].calledAt = t.calledAt;
+        saveState(state);
+        announceCall(t, getConsultorio(activeConsultorioId).name);
+        renderPanel();
+      });
+      document.getElementById("btn-mark-attended").addEventListener("click", function(){
+        var t = turns.find(function(x){ return x.id === current.turnId; });
+        if (t) t.status = "atendido";
+        delete state.currentCall[activeConsultorioId];
+        saveState(state);
+        renderPanel();
+      });
+    } else {
+      elCurrentCallBox.innerHTML = '<div class="ccb-empty">Todavía no se llamó ningún turno.</div>';
+    }
+
+    // queue list
+    var waiting = turns.filter(function(t){ return t.status === "esperando"; }).sort(function(a,b){ return a.number - b.number; });
+    elQueueList.innerHTML = "";
+    if (!waiting.length){
+      elQueueList.innerHTML = '<div class="empty-note">No hay pacientes en espera.</div>';
+    } else {
+      waiting.forEach(function(t){
+        var li = document.createElement("li");
+        li.className = "queue-item";
+        li.innerHTML =
+          '<span class="queue-num">Nº ' + t.number + '</span>' +
+          '<button class="queue-name-btn">' + escapeHtml(t.name) + '</button>' +
+          '<span class="queue-item-actions">' +
+            '<button class="btn btn-light btn-sm" data-act="ausente">Ausente</button>' +
+          '</span>';
+        li.querySelector(".queue-name-btn").addEventListener("click", function(){
+          callTurn(activeConsultorioId, t);
+        });
+        li.querySelector('[data-act="ausente"]').addEventListener("click", function(){
+          t.status = "ausente";
+          saveState(state);
+          renderPanel();
+        });
+        elQueueList.appendChild(li);
+      });
+    }
+
+    // history
+    var history = turns.filter(function(t){ return t.status !== "esperando"; })
+      .sort(function(a,b){ return (b.calledAt||b.createdAt) - (a.calledAt||a.createdAt); });
+    elHistoryList.innerHTML = "";
+    if (!history.length){
+      elHistoryList.innerHTML = '<div class="empty-note">Sin movimientos todavía.</div>';
+    } else {
+      history.forEach(function(t){
+        var li = document.createElement("li");
+        li.className = "history-item";
+        li.innerHTML =
+          '<span class="hi-name">Nº ' + t.number + ' — ' + escapeHtml(t.name) + '</span>' +
+          '<span class="status-pill ' + t.status + '">' + statusLabel(t.status) + '</span>';
+        elHistoryList.appendChild(li);
+      });
+    }
+
+    if (!elSettingsCard.hidden) renderSettings();
+  }
+
+  function statusLabel(s){
+    if (s === "atendido") return "Atendido";
+    if (s === "ausente") return "Ausente";
+    if (s === "llamado") return "Llamado";
+    return s;
+  }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c];
+    });
+  }
+
+  /* ================= PANTALLA PUBLICA ================= */
+  var elUnlockOverlay = document.getElementById("unlock-overlay");
+  var elScreenClinicName = document.getElementById("screen-clinic-name");
+  var elScreenClock = document.getElementById("screen-clock");
+  var elScreenDate = document.getElementById("screen-date");
+  var elConsultoriosGrid = document.getElementById("consultorios-grid");
+  var pantallaUnlocked = false;
+  var lastKnownCalledAt = {};
+  var pantallaInited = false;
+  var clockTimer = null, pollTimer = null;
+
+  document.getElementById("btn-unlock-sound").addEventListener("click", function(){
+    getAudioCtx();
+    if ("speechSynthesis" in window){
+      var u = new SpeechSynthesisUtterance(" ");
+      u.volume = 0;
+      window.speechSynthesis.speak(u);
+    }
+    pantallaUnlocked = true;
+    elUnlockOverlay.hidden = true;
+    playChime();
+    renderPantalla(true);
+  });
+
+  function initPantalla(){
+    if (pantallaInited) { refreshPantallaData(); return; }
+    pantallaInited = true;
+    updateClock();
+    clockTimer = setInterval(updateClock, 1000);
+    pollTimer = setInterval(refreshPantallaData, 1500);
+    refreshPantallaData();
+  }
+
+  function updateClock(){
+    var now = new Date();
+    elScreenClock.textContent = now.toLocaleTimeString("es-AR", { hour: "2-digit", minute:"2-digit" });
+    elScreenDate.textContent = now.toLocaleDateString("es-AR", { weekday:"long", day:"numeric", month:"long" });
+  }
+
+  function refreshPantallaData(){
+    config = loadConfig();
+    state = loadState();
+    ensureConsultorioBuckets(state, config);
+    renderPantalla(false);
+  }
+
+  function renderPantalla(skipAnnounce){
+    elScreenClinicName.textContent = config.clinicName || "DPT Turnero";
+    elConsultoriosGrid.innerHTML = "";
+    config.consultorios.forEach(function(c){
+      var current = state.currentCall[c.id];
+      var turns = state.turns[c.id] || [];
+      var waiting = turns.filter(function(t){ return t.status === "esperando"; }).sort(function(a,b){ return a.number - b.number; });
+
+      var block = document.createElement("div");
+      block.className = "consultorio-block";
+
+      var currentHtml;
+      if (current){
+        currentHtml =
+          '<div class="cb-current-label">Turno actual</div>' +
+          '<div class="cb-current-num">Nº ' + current.number + '</div>' +
+          '<div class="cb-current-name">' + escapeHtml(current.name) + '</div>';
+      } else {
+        currentHtml =
+          '<div class="cb-current-label">Turno actual</div>' +
+          '<div class="cb-current-name empty">Esperando el próximo llamado…</div>';
+      }
+
+      var nextHtml = '<div class="cb-next-title">Próximos turnos</div>';
+      if (!waiting.length){
+        nextHtml += '<div class="cb-next-empty">No hay más turnos en espera.</div>';
+      } else {
+        nextHtml += '<ul class="cb-next-list">' + waiting.slice(0,4).map(function(t){
+          return '<li><span class="n">' + t.number + '</span>' + escapeHtml(t.name) + '</li>';
+        }).join("") + '</ul>';
+      }
+
+      block.innerHTML = '<div class="cb-title">' + escapeHtml(c.name) + '</div>' + currentHtml + nextHtml;
+      elConsultoriosGrid.appendChild(block);
+
+      var prevCalledAt = lastKnownCalledAt[c.id];
+      var newCalledAt = current ? current.calledAt : null;
+      if (pantallaUnlocked && !skipAnnounce && newCalledAt && newCalledAt !== prevCalledAt){
+        block.classList.add("flash");
+        setTimeout(function(){ block.classList.remove("flash"); }, 2600);
+        announceCall({ number: current.number, name: current.name }, c.name);
+      }
+      lastKnownCalledAt[c.id] = newCalledAt;
+    });
+  }
+
+  /* ---------------- cross-tab sync ---------------- */
+  window.addEventListener("storage", function(e){
+    if (e.key !== STATE_KEY && e.key !== CONFIG_KEY) return;
+    config = loadConfig();
+    state = loadState();
+    ensureConsultorioBuckets(state, config);
+    if (!viewPanel.hidden) renderPanel();
+    if (!viewPantalla.hidden) renderPantalla(false);
+  });
+
+  if ("speechSynthesis" in window){
+    window.speechSynthesis.onvoiceschanged = function(){};
+  }
+
+  route();
+})();
+</script>
+</body>
+</html>

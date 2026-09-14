@@ -296,6 +296,7 @@
   .project-tag.maintenance { background: rgba(239,68,68,.12); color: #ef4444; }
   .project-tag.quality { background: rgba(5,150,105,.12); color: var(--green); }
   .project-tag.dashboard { background: rgba(109,40,217,.12); color: var(--accent2); }
+  .project-tag.salud { background: rgba(8,145,178,.12); color: var(--cyan); }
 
   .project-title {
     font-family: 'Space Grotesk', sans-serif;
@@ -696,6 +697,28 @@
             <span class="stack-pill">Netlify</span>
             <span class="stack-pill">Apps Script</span>
             <span class="stack-pill">ESP32</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Turnero para Centros de Salud -->
+      <div class="project-card">
+        <div class="project-card-header">
+          <span class="project-tag salud">Gestión de turnos · Salud</span>
+          <div class="project-title">Turnero Digital para Centros de Salud</div>
+          <div class="project-subtitle">Panel médico + pantalla de sala de espera con voz</div>
+        </div>
+        <div class="project-illustration"><span class="signal"></span><div class="big-icon">🩺</div></div>
+        <div class="project-body">
+          <p class="project-desc">Aplicación web para ordenar y llamar turnos médicos. El profesional carga la cola y toca el nombre del paciente según el orden asignado; la pantalla de la sala de espera muestra el turno actual en vivo, con sonido y anuncio por voz. Soporta varios consultorios en paralelo, historial del día y reinicio diario.</p>
+          <div class="project-stack">
+            <span class="stack-pill">JavaScript</span>
+            <span class="stack-pill">Web Speech API</span>
+            <span class="stack-pill">LocalStorage</span>
+            <span class="stack-pill">Netlify</span>
+          </div>
+          <div style="margin-top:14px">
+            <a href="turnero-salud/index.html" class="pc-btn-hotmart" style="background:linear-gradient(135deg,#0891b2,#0e7490)">🩺 Probar el turnero →</a>
           </div>
         </div>
       </div>
