@@ -12,17 +12,16 @@
   :root {
     --ink:    #0f1117;
     --ink2:   #3d4050;
-    --muted:  #7a7d8c;
-    --page:   #f5f4f0;
+    --muted:  #74777f;
+    --page:   #f4f5f3;
     --white:  #ffffff;
-    --accent: #4338ca;
-    --accent2:#6d28d9;
-    --cyan:   #0891b2;
-    --green:  #059669;
-    --warn:   #d97706;
-    --red:    #dc2626;
-    --line:   #e4e2dc;
-    --node-bg:#1a1d2e;
+    --accent: #0f5266;
+    --accent-dark:#0b3f4d;
+    --green:  #227a4d;
+    --warn:   #b4700a;
+    --red:    #b3261e;
+    --line:   #e0e2df;
+    --node-bg:#16242b;
   }
 
   html { scroll-behavior: smooth; }
@@ -50,7 +49,7 @@
   }
   .topbar-brand {
     font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700; font-size: 14px; color: #c7d2fe;
+    font-weight: 700; font-size: 14px; color: #e7ebec;
     display: flex; align-items: center; gap: 8px;
   }
   .topbar-brand small { color: #64748b; font-weight: 400; font-size: 11px; }
@@ -64,8 +63,8 @@
     transition: transform .12s, box-shadow .12s, background .15s;
   }
   .btn:active { transform: translateY(1px); }
-  .btn-primary { background: linear-gradient(135deg,#4338ca,#6d28d9); color:#fff; }
-  .btn-primary:hover { box-shadow: 0 6px 18px rgba(67,56,202,.35); }
+  .btn-primary { background: var(--accent); color:#fff; }
+  .btn-primary:hover { background: var(--accent-dark); }
   .btn-ghost { background: rgba(255,255,255,.08); color:#cbd5e1; border:1px solid rgba(255,255,255,.14); }
   .btn-ghost:hover { background: rgba(255,255,255,.14); }
   .btn-light { background: var(--white); color: var(--ink); border:1px solid var(--line); }
@@ -78,81 +77,54 @@
   /* ---------- HOME / SELECTOR ---------- */
   .home-hero {
     background: var(--node-bg);
-    padding: 64px 20px 56px;
+    padding: 56px 20px 48px;
     text-align: center;
-    position: relative; overflow: hidden;
   }
-  .home-hero::before {
-    content:""; position:absolute; inset:0;
-    background-image:
-      linear-gradient(rgba(99,102,241,.10) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(99,102,241,.10) 1px, transparent 1px);
-    background-size: 34px 34px;
+  .home-eyebrow {
+    font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+    color: #7fa8b3; margin-bottom: 14px;
   }
-  .home-badge {
-    position: relative;
-    display: inline-flex; align-items: center; gap: 7px;
-    background: rgba(99,102,241,.18);
-    border: 1px solid rgba(99,102,241,.35);
-    color: #a5b4fc; font-size: 11px; font-weight: 600;
-    letter-spacing: 1.5px; text-transform: uppercase;
-    padding: 5px 14px; border-radius: 20px;
-    margin-bottom: 22px;
-  }
-  .badge-dot { width:6px; height:6px; border-radius:50%; background:#4ade80; animation: pulse 2s ease-in-out infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-
   .home-hero h1 {
-    position: relative;
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(28px, 5vw, 46px);
+    font-size: clamp(26px, 4.5vw, 38px);
     font-weight: 700; color: #fff;
-    line-height: 1.15; letter-spacing: -1px;
-    max-width: 680px; margin: 0 auto 14px;
-  }
-  .home-hero h1 em {
-    font-style: normal;
-    background: linear-gradient(90deg,#818cf8,#06b6d4);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
+    line-height: 1.25; letter-spacing: -0.3px;
+    max-width: 640px; margin: 0 auto 14px;
   }
   .home-hero p {
-    position: relative;
-    color: #94a3b8; font-size: 15.5px; max-width: 520px;
+    color: #a9b2b6; font-size: 15px; max-width: 520px;
     margin: 0 auto 40px; line-height: 1.65;
   }
 
   .home-cards {
-    position: relative;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
-    max-width: 760px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    max-width: 720px; margin: 0 auto;
   }
   @media(max-width:640px){ .home-cards{ grid-template-columns:1fr; } }
 
   .home-card {
-    background: rgba(255,255,255,.06);
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 16px; padding: 28px 24px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 10px; padding: 24px 22px;
     text-align: left; text-decoration: none;
-    display: block; transition: border-color .2s, transform .2s;
+    display: block; transition: border-color .15s, background .15s;
   }
-  .home-card:hover { border-color: rgba(129,140,248,.5); transform: translateY(-2px); }
-  .home-card .hc-icon {
-    width: 46px; height: 46px; border-radius: 12px;
-    display:flex; align-items:center; justify-content:center; font-size:22px;
-    background: rgba(67,56,202,.24); border:1px solid rgba(129,140,248,.3);
-    margin-bottom: 16px;
+  .home-card:hover { border-color: rgba(255,255,255,.3); background: rgba(255,255,255,.07); }
+  .home-card .hc-index {
+    display:inline-block; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:12px;
+    color:#7fa8b3; border:1px solid rgba(127,168,179,.4); border-radius:5px;
+    padding:2px 7px; margin-bottom:14px; letter-spacing:.5px;
   }
-  .home-card .hc-title { font-family:'Space Grotesk',sans-serif; font-size:17px; font-weight:700; color:#fff; margin-bottom:6px; }
-  .home-card .hc-desc { font-size: 12.5px; color:#94a3b8; line-height:1.6; margin-bottom: 14px; }
-  .home-card .hc-cta { font-size:12px; font-weight:700; color:#a5b4fc; letter-spacing:.4px; }
+  .home-card .hc-title { font-size:16px; font-weight:700; color:#fff; margin-bottom:6px; }
+  .home-card .hc-desc { font-size: 13px; color:#9aa3a6; line-height:1.6; margin-bottom: 16px; }
+  .home-card .hc-cta { font-size:12px; font-weight:600; color:#fff; letter-spacing:.3px; }
 
   footer.dpt-footer {
-    background: var(--node-bg); padding: 26px 20px;
-    text-align: center; border-top: 1px solid rgba(255,255,255,.06);
+    background: var(--node-bg); padding: 22px 20px;
+    text-align: center; border-top: 1px solid rgba(255,255,255,.08);
   }
-  footer.dpt-footer p { font-size: 11.5px; color: #475569; line-height:1.8; }
-  footer.dpt-footer strong { color: #818cf8; }
+  footer.dpt-footer p { font-size: 11.5px; color: #7a848a; line-height:1.8; }
+  footer.dpt-footer strong { color: #c4ccce; }
 
   /* ---------- PANEL ---------- */
   .panel-wrap { max-width: 1080px; margin: 0 auto; padding: 24px 18px 60px; }
@@ -185,17 +157,16 @@
     padding: 10px 12px; border:1px solid var(--line); border-radius: 9px;
     background: var(--page); color: var(--ink);
   }
-  .add-form input:focus { outline:2px solid rgba(67,56,202,.35); }
+  .add-form input:focus { outline:2px solid rgba(15,82,102,.3); }
 
   .current-call-box {
-    background: linear-gradient(135deg,#1a1f6e,#4338ca);
-    border-radius: 14px; padding: 22px; color:#fff; margin-bottom: 18px;
-    position: relative; overflow:hidden;
+    background: var(--node-bg);
+    border-radius: 10px; padding: 22px; color:#fff; margin-bottom: 18px;
   }
-  .current-call-box .ccb-label { font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:#c7d2fe; margin-bottom:8px; font-weight:700; }
+  .current-call-box .ccb-label { font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:#7fa8b3; margin-bottom:8px; font-weight:700; }
   .current-call-box .ccb-name { font-family:'Space Grotesk',sans-serif; font-size: 26px; font-weight:700; line-height:1.2; margin-bottom:4px; }
-  .current-call-box .ccb-meta { font-size: 12.5px; color:#a5b4fc; }
-  .current-call-box .ccb-empty { font-size: 14px; color:#c7d2fe; }
+  .current-call-box .ccb-meta { font-size: 12.5px; color:#9aa3a6; }
+  .current-call-box .ccb-empty { font-size: 14px; color:#c4ccce; }
   .ccb-actions { display:flex; gap:8px; margin-top: 16px; }
 
   .queue-list { list-style:none; }
@@ -206,9 +177,10 @@
   .queue-item:last-child { border-bottom:none; }
   .queue-num {
     font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px;
-    color: var(--accent); background: rgba(67,56,202,.08);
-    border-radius:8px; padding: 4px 9px; min-width: 46px; text-align:center;
+    color: var(--accent); background: rgba(15,82,102,.08);
+    border-radius:6px; padding: 4px 9px; min-width: 46px; text-align:center;
   }
+  .queue-dni { font-size: 12px; color: var(--muted); }
   .queue-name-btn {
     flex:1; text-align:left; background:none; border:none; cursor:pointer;
     font-family:'Inter',sans-serif; font-size: 14.5px; font-weight:600; color: var(--ink);
@@ -238,36 +210,36 @@
 
   /* ---------- PANTALLA PUBLICA ---------- */
   .screen-body { background: var(--node-bg); min-height:100vh; color:#fff; padding: 28px 28px 40px; }
-  .screen-top { display:flex; align-items:center; justify-content:space-between; margin-bottom: 24px; flex-wrap:wrap; gap:12px; }
-  .screen-brand { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px; color:#c7d2fe; display:flex; align-items:center; gap:10px; }
-  .screen-clock { font-family:'Space Grotesk',sans-serif; font-size: 22px; color:#94a3b8; }
-  .screen-date { font-size: 12px; color:#64748b; text-transform:capitalize; }
+  .screen-top { display:flex; align-items:center; justify-content:space-between; margin-bottom: 24px; flex-wrap:wrap; gap:12px; border-bottom:1px solid rgba(255,255,255,.1); padding-bottom:16px; }
+  .screen-brand { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:17px; color:#e7ebec; display:flex; align-items:center; gap:10px; }
+  .screen-clock { font-family:'Space Grotesk',sans-serif; font-size: 22px; color:#c4ccce; }
+  .screen-date { font-size: 12px; color:#7a848a; text-transform:capitalize; }
 
   .consultorios-grid {
-    display:grid; gap: 20px;
+    display:grid; gap: 18px;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   }
 
   .consultorio-block {
-    background: rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
-    border-radius: 20px; padding: 26px;
-    transition: box-shadow .3s, border-color .3s;
+    background: rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius: 10px; padding: 26px;
+    transition: border-color .3s, background .3s;
   }
   .consultorio-block.flash {
-    border-color: rgba(74,222,128,.8);
-    box-shadow: 0 0 0 4px rgba(74,222,128,.18), 0 0 40px rgba(74,222,128,.25);
+    border-color: rgba(34,150,105,.9);
+    background: rgba(34,150,105,.08);
   }
-  .cb-title { font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:#818cf8; font-weight:700; margin-bottom:14px; }
-  .cb-current-label { font-size:11px; color:#64748b; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; }
-  .cb-current-num { font-family:'Space Grotesk',sans-serif; font-size:15px; color:#a5b4fc; font-weight:700; margin-bottom:2px; }
+  .cb-title { font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:#7fa8b3; font-weight:700; margin-bottom:14px; }
+  .cb-current-label { font-size:11px; color:#7a848a; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; }
+  .cb-current-num { font-family:'Space Grotesk',sans-serif; font-size:15px; color:#9aa3a6; font-weight:700; margin-bottom:2px; }
   .cb-current-name { font-family:'Space Grotesk',sans-serif; font-size: clamp(26px,4vw,40px); font-weight:700; color:#fff; line-height:1.15; margin-bottom: 18px; min-height: 1.15em; }
-  .cb-current-name.empty { color:#475569; font-size: 18px; }
-  .cb-next-title { font-size:10.5px; letter-spacing:1.2px; text-transform:uppercase; color:#64748b; margin-bottom:8px; font-weight:700; }
+  .cb-current-name.empty { color:#5a6367; font-size: 18px; }
+  .cb-next-title { font-size:10.5px; letter-spacing:1.2px; text-transform:uppercase; color:#7a848a; margin-bottom:8px; font-weight:700; }
   .cb-next-list { list-style:none; display:flex; flex-direction:column; gap:6px; }
-  .cb-next-list li { font-size: 13.5px; color:#94a3b8; display:flex; gap:8px; }
-  .cb-next-list .n { color:#4338ca; background:rgba(99,102,241,.18); border-radius:6px; padding:1px 7px; font-weight:700; font-size:11.5px; }
-  .cb-next-empty { font-size:12.5px; color:#475569; }
+  .cb-next-list li { font-size: 13.5px; color:#c4ccce; display:flex; gap:8px; }
+  .cb-next-list .n { color:#7fa8b3; background:rgba(127,168,179,.15); border-radius:5px; padding:1px 7px; font-weight:700; font-size:11.5px; }
+  .cb-next-empty { font-size:12.5px; color:#5a6367; }
 
   .unlock-overlay {
     position:fixed; inset:0; background:rgba(15,17,23,.94);
@@ -296,28 +268,27 @@
 <!-- ================= HOME ================= -->
 <div id="view-home">
   <div class="home-hero">
-    <div class="home-badge"><span class="badge-dot"></span>DPT · SALUD · GESTIÓN DE TURNOS</div>
-    <h1>Turnero Digital para<br><em>Centros de Salud</em></h1>
-    <p>Ordená la fila de pacientes, llamá el próximo turno con un clic y avisá automáticamente en la pantalla de la sala de espera — con sonido y anuncio de voz.</p>
+    <div class="home-eyebrow">DPT — Desarrollos y Procesos Técnicos</div>
+    <h1>Sistema de turnos para consultorios</h1>
+    <p>Ordenar la fila de pacientes, llamar al que sigue y avisarlo en la pantalla de la sala de espera. Sin instalar nada, desde el navegador.</p>
     <div class="home-cards">
       <a class="home-card" href="#/panel">
-        <div class="hc-icon">🩺</div>
-        <div class="hc-title">Panel del Profesional</div>
-        <div class="hc-desc">Cargá pacientes, gestioná la cola por consultorio y llamá el siguiente turno tocando el nombre.</div>
-        <div class="hc-cta">ABRIR PANEL →</div>
+        <div class="hc-index">01</div>
+        <div class="hc-title">Panel del consultorio</div>
+        <div class="hc-desc">Cargar pacientes, ver la cola y llamar el siguiente turno tocando el nombre.</div>
+        <div class="hc-cta">Abrir panel →</div>
       </a>
       <a class="home-card" href="#/pantalla" target="_blank" rel="noopener">
-        <div class="hc-icon">📺</div>
-        <div class="hc-title">Pantalla de Sala de Espera</div>
-        <div class="hc-desc">Pantalla pública para el TV o monitor de la sala: muestra el turno actual con sonido y voz.</div>
-        <div class="hc-cta">ABRIR PANTALLA →</div>
+        <div class="hc-index">02</div>
+        <div class="hc-title">Pantalla de sala de espera</div>
+        <div class="hc-desc">Para el monitor o TV de la sala: muestra el turno llamado con sonido y voz.</div>
+        <div class="hc-cta">Abrir pantalla →</div>
       </a>
     </div>
   </div>
   <footer class="dpt-footer">
     <p>
-      <strong>DPT · Desarrollos y Procesos Técnicos</strong><br>
-      Sistema de Turnos para Centros de Salud · Funciona 100% en el navegador, sin instalación<br>
+      <strong>DPT — Desarrollos y Procesos Técnicos</strong><br>
       Consultas: alejsanchez736@gmail.com
     </p>
   </footer>
@@ -326,11 +297,11 @@
 <!-- ================= PANEL ================= -->
 <div id="view-panel" hidden>
   <div class="topbar">
-    <div class="topbar-brand">🩺 DPT TURNERO <small id="panel-clinic-name">· Panel del Profesional</small></div>
+    <div class="topbar-brand">DPT Turnero <small id="panel-clinic-name">· Panel del profesional</small></div>
     <div class="topbar-actions">
-      <button class="btn btn-ghost btn-sm" id="btn-toggle-settings">⚙️ Configuración</button>
-      <a class="btn btn-ghost btn-sm" href="#/pantalla" target="_blank" rel="noopener">📺 Abrir pantalla</a>
-      <a class="btn btn-ghost btn-sm" href="#/">🏠 Inicio</a>
+      <button class="btn btn-ghost btn-sm" id="btn-toggle-settings">Configuración</button>
+      <a class="btn btn-ghost btn-sm" href="#/pantalla" target="_blank" rel="noopener">Abrir pantalla</a>
+      <a class="btn btn-ghost btn-sm" href="#/">Inicio</a>
     </div>
   </div>
 
@@ -357,7 +328,7 @@
           <label for="input-voice-enabled">Anunciar por voz al llamar un turno</label>
         </div>
         <div>
-          <button class="btn btn-danger btn-sm" id="btn-new-day">🔄 Iniciar nuevo día (borra la cola actual)</button>
+          <button class="btn btn-danger btn-sm" id="btn-new-day">Iniciar nuevo día (borra la cola actual)</button>
         </div>
       </div>
     </div>
@@ -372,15 +343,16 @@
           <div class="current-call-box" id="current-call-box">
             <div class="ccb-empty">Todavía no se llamó ningún turno.</div>
           </div>
-          <button class="btn btn-primary btn-block" id="btn-call-next">▶️ Llamar siguiente turno</button>
+          <button class="btn btn-primary btn-block" id="btn-call-next">Llamar siguiente turno</button>
         </div>
 
         <div class="card">
           <h2>Agregar paciente</h2>
           <div class="card-sub">Se suma al final de la cola de este consultorio.</div>
           <form class="add-form" id="form-add-patient">
-            <input type="text" id="input-patient-name" placeholder="Nombre del paciente" required autocomplete="off">
-            <button class="btn btn-primary" type="submit">+ Agregar a la cola</button>
+            <input type="text" id="input-patient-name" placeholder="Nombre y apellido" required autocomplete="off">
+            <input type="text" id="input-patient-dni" placeholder="DNI (opcional)" inputmode="numeric" autocomplete="off" style="flex:0 1 140px">
+            <button class="btn btn-primary" type="submit">Agregar a la cola</button>
           </form>
         </div>
       </div>
@@ -405,13 +377,13 @@
 <!-- ================= PANTALLA PUBLICA ================= -->
 <div id="view-pantalla" hidden>
   <div class="unlock-overlay" id="unlock-overlay">
-    <h2>📺 Pantalla de Sala de Espera</h2>
+    <h2>Pantalla de sala de espera</h2>
     <p>Tocá el botón para activar el sonido y la voz de los anuncios. Después dejá esta pantalla abierta en el monitor o TV de la sala de espera.</p>
-    <button class="btn btn-primary" id="btn-unlock-sound">🔊 Activar sonido y comenzar</button>
+    <button class="btn btn-primary" id="btn-unlock-sound">Activar sonido y comenzar</button>
   </div>
   <div class="screen-body">
     <div class="screen-top">
-      <div class="screen-brand">🩺 <span id="screen-clinic-name">DPT Turnero</span></div>
+      <div class="screen-brand"><span id="screen-clinic-name">DPT Turnero</span></div>
       <div style="text-align:right">
         <div class="screen-clock" id="screen-clock">--:--</div>
         <div class="screen-date" id="screen-date"></div>
@@ -568,6 +540,7 @@
   var elHistoryList = document.getElementById("history-list");
   var elFormAdd = document.getElementById("form-add-patient");
   var elInputName = document.getElementById("input-patient-name");
+  var elInputDni = document.getElementById("input-patient-dni");
   var elBtnCallNext = document.getElementById("btn-call-next");
 
   document.getElementById("btn-toggle-settings").addEventListener("click", function(){
@@ -671,12 +644,14 @@
   elFormAdd.addEventListener("submit", function(e){
     e.preventDefault();
     var name = elInputName.value.trim();
+    var dni = elInputDni.value.trim();
     if (!name || !activeConsultorioId) return;
     state.counters[activeConsultorioId] = (state.counters[activeConsultorioId] || 0) + 1;
     var turn = {
       id: uid(),
       number: state.counters[activeConsultorioId],
       name: name,
+      dni: dni,
       status: "esperando",
       createdAt: Date.now(),
       calledAt: null
@@ -684,6 +659,8 @@
     state.turns[activeConsultorioId].push(turn);
     saveState(state);
     elInputName.value = "";
+    elInputDni.value = "";
+    elInputName.focus();
     renderPanel();
     showToast("Paciente agregado a la cola");
   });
@@ -713,8 +690,8 @@
         '<div class="ccb-name">Nº ' + current.number + ' — ' + escapeHtml(current.name) + '</div>' +
         '<div class="ccb-meta">Llamado hace ' + mins + ' min</div>' +
         '<div class="ccb-actions">' +
-          '<button class="btn btn-ghost btn-sm" id="btn-recall" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)">🔁 Repetir llamado</button>' +
-          '<button class="btn btn-ghost btn-sm" id="btn-mark-attended" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)">✅ Marcar atendido</button>' +
+          '<button class="btn btn-ghost btn-sm" id="btn-recall" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)">Repetir llamado</button>' +
+          '<button class="btn btn-ghost btn-sm" id="btn-mark-attended" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)">Marcar atendido</button>' +
         '</div>';
       document.getElementById("btn-recall").addEventListener("click", function(){
         var t = turns.find(function(x){ return x.id === current.turnId; });
@@ -747,7 +724,9 @@
         li.className = "queue-item";
         li.innerHTML =
           '<span class="queue-num">Nº ' + t.number + '</span>' +
-          '<button class="queue-name-btn">' + escapeHtml(t.name) + '</button>' +
+          '<button class="queue-name-btn">' + escapeHtml(t.name) +
+            (t.dni ? ' <span class="queue-dni">(DNI ' + escapeHtml(t.dni) + ')</span>' : '') +
+          '</button>' +
           '<span class="queue-item-actions">' +
             '<button class="btn btn-light btn-sm" data-act="ausente">Ausente</button>' +
           '</span>';
